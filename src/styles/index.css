@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import './resets.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tipo de fuente */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('background.jpg');
+}
+
+/* Configuración de barra de deslizamiento */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f0f0f0;
+}
+
+.dark * {
+    scrollbar-color: #354657 #142434;
+}
+
+@layer base {
+    #root {
+        @apply h-svh;
+    }
+
+    body {
+        @apply bg-cover bg-fixed;
+    }
+
+    body,
+    body input {
+        @apply text-slate-600 dark:text-gray-300 transition-colors duration-100;
+    }
+
+    button {
+        @apply select-none transition;
+    }
+
+    p > a {
+        @apply text-main-500 underline;
+    }
+
+    /* Animación de botón al darle clic */
+    button.ui-interactive {
+        @apply active:scale-90 transition;
+    }
+
+    /* Labels que envuelven botones para hacer más grande su área de clic */
+    .ui-label-button {
+        @apply cursor-pointer;
+    }
+
+    /* Estilos de la UI */
+    .ui-text {
+        @apply text-black dark:text-white;
+    }
+
+    .ui-background-danger {
+        @apply bg-red-500/30;
+    }
+
+    .ui-text-danger {
+        @apply text-red-600 dark:text-red-400;
+    }
+
+    .ui-background-warning {
+        @apply bg-yellow-500/30;
+    }
+
+    .ui-text-warning {
+        @apply text-yellow-600 dark:text-yellow-500;
+    }
+
+    .ui-background-success {
+        @apply bg-green-500/30;
+    }
+
+    .ui-text-success {
+        @apply text-green-500;
+    }
+
+    .ui-background-info {
+        @apply bg-sky-500/30;
+    }
+
+    .ui-text-info {
+        @apply text-sky-500;
+    }
+
+    .ui-background-none {
+        @apply bg-gray-500/20;
+    }
+
+    .ui-text-none {
+        @apply text-gray-600 dark:text-gray-400;
+    }
+}
+
+@layer utilities {
+    .scrollbar-hide {
+        -ms-overflow-style: none; /* Para Internet Explorer y Edge */
+        scrollbar-width: none; /* Para Firefox */
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none; /* Para Chrome */
+    }
+
+    .text-theme {
+        @apply text-slate-600 dark:text-gray-300;
+    }
+}
+
+/* Desaparición de botones de incrementar y decrementar */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+/* Efecto de pulso en botones */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: growAndFade 0.625s ease-out forwards;
+    pointer-events: none;
+}
+
+/* Animación de crecimiento para efecto de pulso en botones */
+@keyframes growAndFade {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+.dsk-vertical-difuminate {
+    mask-image: linear-gradient(to top, transparent 0%, rgb(0, 0, 0) 0.625rem, rgb(0, 0, 0) calc(100% - 0.625rem), transparent 100%);
+}
+
+.mob-vertical-difuminate {
+    mask-image: linear-gradient(to top, transparent 0%, rgb(0, 0, 0) 1.5rem, rgb(0, 0, 0) calc(100% - 1.5rem), transparent 100%);
+}
+
+.ui-table-column {
+    mask-image: linear-gradient(to right, rgb(0, 0, 0) calc(100% - 2.5rem), transparent calc(100% - 2rem));
+}
+
+.tablecell-difuminat {
+    mask-image: linear-gradient(to right,rgb(0, 0, 0) calc(100% - 1rem), transparent calc(100% - 0.5rem));
+}
+
+.profile-image {
+    mask-image: url('../components/avatar/image_mask/profile_image_mask.svg');
+    mask-size: cover;
+    -webkit-mask-size: cover;
+    mask-position: center;
+    -webkit-mask-position: center;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+}
+
+.profile-status-image {
+    mask-image: url('../components/avatar/image_mask/online_image_mask.svg');
+    mask-size: cover;
+    -webkit-mask-size: cover;
+    mask-position: center;
+    -webkit-mask-position: center;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+}

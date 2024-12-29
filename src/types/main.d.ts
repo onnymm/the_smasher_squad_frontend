@@ -10,7 +10,7 @@ type CurrentUserData = {
     id: number | undefined;
     user: string;
     name: string;
-    odoo_id: number | undefined;
+    avatar: string;
     "create_date": string;
     "write_date": string;
 }
