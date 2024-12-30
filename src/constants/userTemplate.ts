@@ -2,7 +2,7 @@ const userTemplate: CurrentUserData = {
     id: undefined,
     user: "",
     name: "",
-    odoo_id: undefined,
+    avatar: "",
     "create_date": "",
     "write_date": "",
 }
