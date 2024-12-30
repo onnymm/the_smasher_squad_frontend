@@ -39,7 +39,7 @@ const CellComponent = React.memo<(config: TableCellRender) => (React.JSX.Element
     }) => {
 
         // Inicialización del estilo del componente
-        const uiStyle = setComponentStyle(props[columnKey], recordConfig.options);
+        const uiStyle = setComponentStyle(props[columnKey] as string | number | boolean, recordConfig.options);
 
         // Construcción del componente a renderizar
         const Component = buildCellComponent(recordConfig, fields);
@@ -53,17 +53,10 @@ const CellComponent = React.memo<(config: TableCellRender) => (React.JSX.Element
 );
 
 // Constructor del componente de la celda
-const buildCellComponent: (
+const buildCellComponent = (
     recordConfig: ViewConfig,
-    fields: DataField[]
-) => ( (config: {
-    [key: string]: string | number | boolean;
-}) => (React.JSX.Element) ) = (
-    recordConfig,
-    fields,
+    fields: DataField[],
 ) => {
-
-    console.log(recordConfig)
 
     // Si el valor del tipo es un componente personalizado
     if ( typeof recordConfig.type === 'function' ) {

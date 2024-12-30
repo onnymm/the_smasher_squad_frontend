@@ -36,7 +36,7 @@ const TableBody = ({
             {
                 data.data.map(
                     (record, i) => (
-                        <TableRow key={i} record={record} viewConfig={viewConfig} fields={data.fields} visibleColumns={visibleColumns} columnWidths={columnWidths} />
+                        <TableRow key={i} record={record as GenericObject} viewConfig={viewConfig} fields={data.fields} visibleColumns={visibleColumns} columnWidths={columnWidths} />
                     )
                 )
             }
