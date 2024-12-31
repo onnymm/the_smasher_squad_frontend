@@ -50,6 +50,7 @@ export default {
             transitionProperty: {
                 width: 'width',
                 height: 'height',
+                hover: 'backdrop-filter, box-shadow, background-color',
             },
             backdropSaturate: {
                 115: '1.15',

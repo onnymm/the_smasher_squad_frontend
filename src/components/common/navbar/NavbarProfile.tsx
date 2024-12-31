@@ -17,9 +17,6 @@ const NavbarProfile: () => (React.JSX.Element) = () => {
     // Obtención de los datos de perfil del usuario actual
     const currentUser = useContext(UserContext);
 
-    console.log(currentUser.avatar);
-    
-
     return (
         <div id="navbar-profile" className="flex flex-row items-center gap-2 w-max h-full">
             <div className="sm:block hidden">

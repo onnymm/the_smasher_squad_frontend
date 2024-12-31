@@ -90,7 +90,7 @@ const Select = <T extends string | number | boolean>(
     )
 
     return (
-        <div className="flex flex-col w-min pointer-events-none *:pointer-events-auto" ref={selectRef}>
+        <div className="group-[.ui-layout-group]:w-full flex flex-col w-min pointer-events-none *:pointer-events-auto" ref={selectRef}>
             <ButtonTextIcon onClick={() => setIsOpen(prevState => !prevState)} icon={icon} type={type}>
                 <div className="flex flex-row items-center gap-4">
                     {children}

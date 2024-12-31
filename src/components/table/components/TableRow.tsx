@@ -36,7 +36,7 @@ const TableRow = ({
 }: TableRowParams) => {
 
     return (
-        <tr>
+        <tr className="bg-transparent hover:shadow-md hover:backdrop-blur-sm hover:backdrop-brightness-125 hover:backdrop-saturate-115 transition-backdrop duration-500">
             {
                 (
                     // Filtro por las columnas visibles

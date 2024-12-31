@@ -43,6 +43,10 @@ body {
         @apply text-main-500 underline;
     }
 
+    div.ui-layout-group > div {
+        @apply w-full;
+    }
+
     /* Animación de botón al darle clic */
     button.ui-interactive {
         @apply active:scale-90 transition;

@@ -1,6 +1,6 @@
 import { ListBulletIcon } from "@heroicons/react/24/solid"
 import DataView from "../../components/data_visualizers/DataView"
-import { SolarSystem, StarBase, TableAddedBy, TableAttackedBy, TableCoordinates, TablePlayer, TableWrittenBy, XPLevel } from "../../components/widgets/custom_widgets/StarBase"
+import { SolarSystem, StarBase, TableAddedBy, TableAttackedBy, TableCoordinates, TablePlayer, TableWrittenBy, XPLevel } from "../../components/widgets/custom_widgets/ManageCoords"
 
 const Coords: () => (React.JSX.Element) = () => {
 

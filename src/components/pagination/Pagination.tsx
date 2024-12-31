@@ -61,9 +61,6 @@ const Pagination: (config: PaginationParams<number | ((page: number) => (number)
         }, [pages, page]
     )
 
-    console.log(pages, page);
-    
-
     // Obtención de funciones de cambio de página para control de cambios
     //      dentro del rango válido
     const { setPageIndex, increasePage, decreasePage } = usePagination(pages, setPage);

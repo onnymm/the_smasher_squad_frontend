@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputTemplate from "./_InputTemplate";
 
 interface InputNumericParams {
     value: number | undefined;
-    setValue: React.Dispatch<React.SetStateAction<number | undefined | ((page: number) => (number))>>;
+    setValue: React.Dispatch<React.SetStateAction<number | undefined>> | React.Dispatch<React.SetStateAction<number | undefined | ((value: number) => (number))>>;
     min?: number;
     max?: number;
     onChange?: (controlledValue: number, event: React.ChangeEvent<HTMLInputElement>) => (void);
@@ -53,7 +53,7 @@ interface InputNumericParams {
  */ 
 const InputNumeric: (config: InputNumericParams) => (React.JSX.Element) = ({
     value,
-    setValue,
+    // setValue,
     min,
     max,
     onChange,
@@ -65,17 +65,18 @@ const InputNumeric: (config: InputNumericParams) => (React.JSX.Element) = ({
 }) => {
 
     // Uso de nuevo valor para el componente
-    const [ inputValue, setInputValue ] = useState<string>(value ? String(value) : "");
+    const [ inputValue, setInputValue ] = useState<string>(value !== undefined ? String(value) : "");
 
-    // Cambio manual del valor de entrada
-    useEffect(
-        () => {
-            setInputValue(String(value));
-        }, [value]
-    )
+    // // Cambio manual del valor de entrada
+    // useEffect(
+    //     () => {
+    //         // setInputValue(value !== undefined ? String(value) : "");
+    //     }, [value]
+    // )
 
     // Validación de rango
     const controlValue: () => (number) = () => {
+        
         // Se recibe el texto y se parsea a número
         if ( !inputValue ) return 0;
         const numericValue = (Number(inputValue));
@@ -96,7 +97,7 @@ const InputNumeric: (config: InputNumericParams) => (React.JSX.Element) = ({
         // Ejecución de función provista
         if ( onChange ) {
             onChange(controlValue(), event);
-            setValue(controlValue());
+            // setValue(controlValue());
         } else {
             // Validación de rango
             controlValue();

@@ -15,10 +15,14 @@ export const sidebarMenu: MenuSection[] = [
                 name: 'Guerra actual',
                 icon: HomeIcon,
                 routes: [
+                    // {
+                    //     name: 'Coordenadas',
+                    //     route: '/coords',
+                    // },
                     {
                         name: 'Coordenadas',
-                        route: '/coords',
-                    },
+                        route: '/summary',
+                    }
                 ]
             },
         ]
