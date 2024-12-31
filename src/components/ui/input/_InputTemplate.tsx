@@ -22,6 +22,7 @@ interface _InputParams {
     loading?: boolean;
     type?: InputType;
     autoCapitalize?: InputAutoCapitalizeType;
+    disabled?: boolean;
     _iconOn?: IconType;
     _iconOff?: IconType;
     componentBefore?: React.JSX.Element | React.JSX.Element[];
@@ -84,6 +85,7 @@ const InputTemplate: (config: _InputParams) => (React.JSX.Element) = ({
     loading = undefined,
     type = 'text',
     autoCapitalize = "sentences",
+    disabled = false,
     _iconOn = undefined,
     _iconOff = undefined,
     componentBefore = undefined,
@@ -235,6 +237,7 @@ const InputTemplate: (config: _InputParams) => (React.JSX.Element) = ({
                     placeholder={placeholder}
                     ref={inputRef}
                     spellCheck={false}
+                    disabled={disabled}
                 />
 
             </div>

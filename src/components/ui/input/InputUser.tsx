@@ -6,6 +6,7 @@ interface InputUserParams {
     setValue: React.Dispatch<React.SetStateAction<string>>;
     visiblePlaceholder: string;
     onEnter?: (event: React.KeyboardEvent) => (void);
+    disabled?: boolean;
 }
 
 /**
@@ -31,6 +32,7 @@ const InputUser: (config: InputUserParams) => (React.JSX.Element) = ({
     setValue,
     visiblePlaceholder,
     onEnter,
+    disabled = false,
 }) => {
 
     return (
@@ -41,6 +43,7 @@ const InputUser: (config: InputUserParams) => (React.JSX.Element) = ({
             icon={UserIcon}
             autoCapitalize={'off'}
             onEnter={onEnter}
+            disabled={disabled}
         />
     )
 }

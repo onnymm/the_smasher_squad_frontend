@@ -1,6 +1,6 @@
 import { CheckIcon, ExclamationTriangleIcon, XMarkIcon } from "@heroicons/react/16/solid";
 
-interface AlertTemplateParams extends TextInvolverComponent {
+interface AlertTemplateParams extends GenericInvolverComponent {
     title?: string; // Título a renderizar.
     type: StatusStyle; // Tipo de alerta a mostrar.
     closeable?: boolean; // Indicdor de si la alerta puede cerrarse o se mantendrá siempre visible. El valor por defecto es `false`.

@@ -31,9 +31,9 @@ export const sidebarMenu: MenuSection[] = [
         name: 'Configuración',
         groups: [
             {
-                name: 'Preferencias',
+                name: 'Mi cuenta',
                 icon: Cog6ToothIcon,
-                routes: '',
+                routes: '/me',
             }
         ]
     },
