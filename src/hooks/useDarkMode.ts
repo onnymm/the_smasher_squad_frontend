@@ -24,35 +24,36 @@ const useDarkMode: () => ({
 }) = () => {
 
     const [ darkMode, setDarkMode ] = useState<boolean>(
-        () => {
+        true
+        // () => {
 
-            // Se obtiene la configuración del modo oscuro desde el dispositivo
-            const storedDarkMode = localStorage.getItem("darkMode") as 'false' | 'true' | null
+        //     // Se obtiene la configuración del modo oscuro desde el dispositivo
+        //     const storedDarkMode = localStorage.getItem("darkMode") as 'false' | 'true' | null
 
-            // Si existe una configuración guardada se establece ésta
-            if ( storedDarkMode !== null ) {
+        //     // Si existe una configuración guardada se establece ésta
+        //     if ( storedDarkMode !== null ) {
 
-                // Índice para conversión a booleano
-                const keyValue = {
-                    'false': false,
-                    'true': true,
-                }
+        //         // Índice para conversión a booleano
+        //         const keyValue = {
+        //             'false': false,
+        //             'true': true,
+        //         }
 
-                // Retorno de la configuración guardada, convertida a booleano
-                return Boolean( keyValue[storedDarkMode] )
-            }
+        //         // Retorno de la configuración guardada, convertida a booleano
+        //         return Boolean( keyValue[storedDarkMode] )
+        //     }
 
-            // En caso de no existir se toma la configuración del tema del dispositivo
-            const systemDarkMode = (
-                window.matchMedia(
-                    '(prefers-color-scheme: dark)'
-                )
-                .matches
-            )
+        //     // En caso de no existir se toma la configuración del tema del dispositivo
+        //     const systemDarkMode = (
+        //         window.matchMedia(
+        //             '(prefers-color-scheme: dark)'
+        //         )
+        //         .matches
+        //     )
 
-            // Se retorna la preferencia del usuario en el dispositivo
-            return systemDarkMode
-        }
+        //     // Se retorna la preferencia del usuario en el dispositivo
+        //     return systemDarkMode
+        // }
     )
 
     useEffect(
