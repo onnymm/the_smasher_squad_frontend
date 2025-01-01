@@ -18,6 +18,8 @@ const App: () => (React.JSX.Element) = () => {
 
     const [ modalContent, setModalContent ] = useState<string | React.JSX.Element | Array<React.JSX.Element | string | boolean> | undefined>(undefined);
 
+    const { closeModal, addOnCloseModalCallback, removeOnCloseModalCallback } = useModalContent(setModalContent);
+
     // Inicialización de barra lateral siempre activa
     const [ isSidebarOpen, setIsSidebarOpen ] = useState<boolean>(false);
     const [ isSidebarLocked, setIsSidebarLocked ] = useState<boolean>(false);
@@ -25,7 +27,7 @@ const App: () => (React.JSX.Element) = () => {
     return (
         // Proveedor de contexto de modo oscuro
         <DarkModeContext.Provider value={{ darkMode, setDarkMode }}>
-            <ModalContext.Provider value={{modalContent, setModalContent}} >
+            <ModalContext.Provider value={{ modalContent, setModalContent, closeModal, addOnCloseModalCallback, removeOnCloseModalCallback }} >
 
                 <AppContext.Provider value={{ isSidebarLocked, setIsSidebarLocked, isSidebarOpen, setIsSidebarOpen }} >
                     <div className='relative z-0 flex flex-col h-svh transition'>
@@ -42,3 +44,31 @@ const App: () => (React.JSX.Element) = () => {
 };
 
 export default App;
+
+const useModalContent = (setModalContent: React.Dispatch<React.SetStateAction<string | React.JSX.Element | Array<React.JSX.Element | string | boolean> | undefined>>) => {
+
+    const modalCallbacks: Record<string, () => void> = {}
+
+    const closeModal = () => {
+
+        // Ejecución de todas las funciones 
+        Object.values(modalCallbacks).forEach(
+            ( f ) => f()
+        );
+
+        // Ejecución de eliminación de contenido del modal
+        setModalContent(undefined)
+    }
+
+    const addOnCloseModalCallback = (key: string, callback: () => void) => {
+
+        modalCallbacks[key] = callback;
+    }
+
+    const removeOnCloseModalCallback = (key: string) => {
+
+        modalCallbacks[key] = () => null;
+    }
+
+    return { closeModal, addOnCloseModalCallback, removeOnCloseModalCallback }
+}

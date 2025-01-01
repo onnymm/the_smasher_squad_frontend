@@ -103,20 +103,13 @@ const Enemies: () => (React.JSX.Element) = () => {
         },
     ]
 
-    const filters: DataViewFilters = {
-        default: {
-            'criteria': '[]',
-        },
-        available: []
-    }
-
     return (
         <DataView
             backendPath="/alliances/enemies"
             viewConfig={viewConfig}
             noRecordsIcon={ListBulletIcon}
             noRecordsMessage="No hay coordenadas"
-            filters={filters}
+            showPagination={false}
         />
     )
 }

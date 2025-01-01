@@ -4,6 +4,8 @@ import { ModalContext } from "../../../contexts/modalContext";
 import ButtonIcon from "../../ui/button/ButtonIcon";
 import { ArrowPathIcon, FlagIcon, PencilIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { ManageCoords } from "../../actions/AddCoords";
+import AttackPlanet from "../../actions/AttackPlanet";
+import RestorePlanet from "../../actions/RestorePlanet";
 
 interface TableCoordinatesParams {
     x: number | null;
@@ -218,21 +220,15 @@ export const CoordsCell = (planet: string) => {
                         </div>
 
                         {/* Botones de interacción con los datos */}
-                        <div className="group-[.coords-cell]:group-hover:h-10 flex flex-row justify-start items-center gap-2 opacity-0 group-[.coords-cell]:group-hover:opacity-100 h-0 ui-cell-cords">
+                        {!nthPlanet['restores_at'] &&
+                            <div className="group-[.coords-cell]:group-hover:h-10 flex flex-row justify-start items-center gap-2 opacity-0 group-[.coords-cell]:group-hover:opacity-100 h-0 ui-cell-cords">
 
-                            {/* Marcar como ocupado */}
-                            <ButtonIcon
-                                icon={FlagIcon}
-                                type="primary"
-                                onClick={() => null}
-                            />
-
-                            {/* Editar información */}
-                            <ButtonIcon
-                                icon={PencilIcon}
-                                onClick={
-                                    () => setModalContent(
-                                        <ManageCoords
+                                {/* Marcar como ocupado */}
+                                <ButtonIcon
+                                    icon={FlagIcon}
+                                    type="primary"
+                                    onClick={() => setModalContent(
+                                        <AttackPlanet
                                             colonyId={nthPlanet['id']}
                                             enemyName={name}
                                             x={nthPlanet['x']}
@@ -240,21 +236,60 @@ export const CoordsCell = (planet: string) => {
                                             sscolor={nthPlanet['color']}
                                             enemyAvatar={avatar}
                                             starbase_level={nthPlanet['starbase_level']}
-                                            enemyId={nthPlanet['enemy_id']}
                                             planet={nthPlanet['planet']}
                                         />
-                                    )
-                                }
-                            />
+                                    )}
+                                />
 
-                            {/* Reconstrucción manual */}
-                            <ButtonIcon
-                                icon={ArrowPathIcon}
-                                type="success"
-                                onClick={() => null}
-                                disabled
-                            />
-                        </div>
+                                {/* Editar información */}
+                                <ButtonIcon
+                                    icon={PencilIcon}
+                                    onClick={
+                                        () => setModalContent(
+                                            <ManageCoords
+                                                colonyId={nthPlanet['id']}
+                                                enemyName={name}
+                                                x={nthPlanet['x']}
+                                                y={nthPlanet['y']}
+                                                sscolor={nthPlanet['color']}
+                                                enemyAvatar={avatar}
+                                                starbase_level={nthPlanet['starbase_level']}
+                                                planet={nthPlanet['planet']}
+                                            />
+                                        )
+                                    }
+                                />
+
+                            </div>
+                        }
+
+                        {nthPlanet['restores_at'] &&
+                            <div className="flex flex-row justify-start items-center gap-2">
+
+                                <div className="flex flex-row items-center gap-2 font-mono">
+                                    <img src="/clock.png" alt="" />
+                                    {nthPlanet['restores_at'].split(" ")[1].split(".")[0]}
+                                </div>
+
+                                {/* Reconstrucción manual */}
+                                <ButtonIcon
+                                    icon={ArrowPathIcon}
+                                    type="success"
+                                    onClick={() => setModalContent(
+                                        <RestorePlanet
+                                            colonyId={nthPlanet['id']}
+                                            enemyName={name}
+                                            x={nthPlanet['x']}
+                                            y={nthPlanet['y']}
+                                            sscolor={nthPlanet['color']}
+                                            enemyAvatar={avatar}
+                                            starbase_level={nthPlanet['starbase_level']}
+                                            planet={nthPlanet['planet']}
+                                        />
+                                    )}
+                                />
+                            </div>
+                        }
                     </div>
                 )
 
@@ -282,7 +317,6 @@ export const CoordsCell = (planet: string) => {
                                             enemyName={name}
                                             enemyAvatar={avatar}
                                             starbase_level={nthPlanet['starbase_level']}
-                                            enemyId={nthPlanet['enemy_id']}
                                             planet={nthPlanet['planet']}
                                         />
                                     )

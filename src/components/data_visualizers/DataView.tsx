@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import getTableData from "../../api/dataVisualization";
 import Header from "../layout/Header";
 import Select from "../ui/select/Select";
@@ -8,15 +8,17 @@ import Pagination from "../pagination/Pagination";
 import useSortingFields from "../../hooks/useSortingFields";
 import Table from "../table/Table";
 import { COMMON_LEGEND } from "../../settings/appSettings";
+import { ModalContext } from "../../contexts/modalContext";
 
 interface DataViewParams {
     backendPath: string;
     viewConfig: ViewConfig[];
-    filters: DataViewFilters;
+    filters?: DataViewFilters;
     // apiCallback?: GenericDataViewAPICallback;
     itemsPerPage?: number;
     noRecordsIcon: IconType;
     noRecordsMessage: string;
+    showPagination?: boolean;
 }
 
 const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
@@ -27,11 +29,13 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
     itemsPerPage: _itemsPerPage = 40,
     noRecordsIcon: NoRecordsIcon = ListBulletIcon,
     noRecordsMessage = COMMON_LEGEND.NO_RECORDS_MESSAGE,
+    showPagination = true,
 }) => {
 
     // Función para crear o actualizar filtro
     const createOrUpdateFilter = useCallback<(activeFilter: number | undefined) => ({ criteria: string } | DataFilter)>(
         (activeFilter: number | undefined) => {
+            if ( !filters ) return {criteria: ""};
             // Si hay un filtro, se establece éste
             if ( activeFilter !== undefined ) {
                 return filters.available[activeFilter]
@@ -39,8 +43,12 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
             } else {
                 return filters.default
             }
-        }, [filters.available, filters.default]
+        }, [filters]
     )
+
+    const [ reload, setReload ] = useState<boolean>(false);
+
+    const { addOnCloseModalCallback, removeOnCloseModalCallback} = useContext(ModalContext);
 
     // // Estado de carga inicial
     // const [ initialLoad, setInitialLoad ] = useState<boolean>(false);
@@ -59,7 +67,7 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
 
     // Inicialización de objeto de filtros para uso en componente Select
     const [ filterOptions, setFilterOptions, activeFilter ] = useOptions<DataFilter[]>(
-        filters.available,
+        filters ? filters.available : [],
         {mode: 'switch'}
     );
 
@@ -120,7 +128,7 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
                     'search_criteria': filter.criteria
                 },
             )
-        }, [backendPath, itemsPerPage, sortingFieldKey, page, ascending, filter]
+        }, [backendPath, itemsPerPage, sortingFieldKey, page, ascending, filter, reload]
     )
 
     // Establecer carga a falso después de recibir los datos tras nueva solicitud
@@ -128,9 +136,14 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
         () =>{
             if ( data ) {
                 setLoading(false)
-                tableRef.current?.scrollTo(0, 0)
             }
         }, [data]
+    )
+    
+    useEffect(
+        () => {
+            tableRef.current?.scrollTo(0, 0)
+        }, [page]
     )
 
     // Cambio de página a 0 cada ver que los filtros cambien
@@ -140,17 +153,33 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
         }, [activeFilter]
     )
 
+    useEffect(
+        () => {
+            addOnCloseModalCallback('dataView', () => (setReload( prevState => !prevState )))
+
+            return (
+                () => {
+                    removeOnCloseModalCallback('dataView');
+                }
+            );
+        }, [addOnCloseModalCallback, removeOnCloseModalCallback]
+    )
+
     if (data) {
         return (
             <div id="page" className="flex flex-col gap-4 h-full">
                 <Header>
-                    <Select options={filterOptions} setOptions={setFilterOptions} mode="switch" type="primary" icon={FunnelIcon} iconActive={FunnelIcon}>
-                        Filtrar por
-                    </Select>
+                    {filters &&
+                        <Select options={filterOptions} setOptions={setFilterOptions} mode="switch" type="primary" icon={FunnelIcon} iconActive={FunnelIcon}>
+                            Filtrar por
+                        </Select>
+                    }
                     <Select options={visibleColumns} setOptions={setVisibleColumns} mode="multiOption" icon={TableCellsIcon} iconActive={EyeIcon}>
                         Mostrar columnas
                     </Select>
-                    <Pagination count={data?.count} itemsPerPage={itemsPerPage} disabled={false} page={page as number} setPage={setPage} />
+                    {showPagination &&
+                        <Pagination count={data?.count} itemsPerPage={itemsPerPage} disabled={false} page={page as number} setPage={setPage} />
+                    }
                 </Header>
                 <Table tableRef={tableRef} loading={loading} data={data} viewConfig={viewConfig} sortingFieldKey={sortingFieldKey} ascending={ascending} visibleColumns={visibleColumns} setSortingColumn={setTableSortingField} noRecordsIcon={NoRecordsIcon} noRecordsMessage={noRecordsMessage} />
             </div>

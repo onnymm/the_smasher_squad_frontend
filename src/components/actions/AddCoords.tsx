@@ -16,7 +16,6 @@ interface AddCoordsParams {
     x?: number | undefined;
     y?: number | undefined;
     sscolor?: SolarColorOption;
-    enemyId: number;
     colonyId: number;
     planet: number;
     'starbase_level': 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
