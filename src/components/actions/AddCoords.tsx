@@ -31,9 +31,27 @@ export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
     planet,
     starbase_level,
 }) => {
-
+    
     // Obtención de función para agregar contenido al modal
-    const { setModalContent } = useContext(ModalContext)
+    const { closeModal } = useContext(ModalContext)
+
+    const sendCoords = async (props: Record<string, any>, setSaved: React.Dispatch<React.SetStateAction<boolean | undefined>>) => {
+
+        setSaved(undefined);
+
+        try {
+            // Envío de datos al API
+            const response = await mobiusAxios.post(getBackendUrl('/alliances/update_coords'), props, { authenticate: true})
+            // Si los datos fueron guardados correctamente...
+            if ( response.data === true ) {
+                setSaved(true);
+            }
+    
+        } catch (error) {
+            // Si no, se imprime el error en consola
+            console.log(error);
+        }
+    }
 
     // Declaración de opciones de color de sistema solar
     const solarSystemColors: SelectableOption<string>[] = [
@@ -67,7 +85,7 @@ export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
     const [ solarSystemColorOptions, setSolarSystemColorOptions, solarSystemColorKey ] = useOptions(solarSystemColors, {mode: 'switch', initialActive: sscolor});
 
     // Valor de si se ha guardado la información en el API del backend
-    const [ saved, setSaved ] = useState<boolean>(false);
+    const [ saved, setSaved ] = useState<boolean | undefined>(false);
     
     // Inicialización de valores X, Y
     const [ inputX, setInputX ] = useState<undefined | number>(x);
@@ -86,9 +104,9 @@ export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
         () => {
             if ( saved ) {
                 // Se borra el contenido del modal para que éste se cierre
-                setModalContent(undefined);
+                closeModal()
             }
-        }, [saved, setModalContent]
+        }, [saved, closeModal]
     )
 
     return (
@@ -125,28 +143,11 @@ export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
                 icon={CheckIcon}
                 onClick={triggerSendCoords}
                 type="primary"
-                disabled={ !inputX || !inputY }
+                disabled={ !inputX || !inputY || saved === undefined }
             >
                 Guardar
             </ButtonTextIcon>
 
         </Group>
     )
-}
-
-const sendCoords = async (props: Record<string, any>, setSent: React.Dispatch<React.SetStateAction<boolean>>) => {
-
-    try {
-        // Envío de datos al API
-        const response = await mobiusAxios.post(getBackendUrl('/alliances/update_coords'), props, { authenticate: true})
-        // Si los datos fueron guardados correctamente...
-        if ( response.data === true ) {
-            setSent(true);
-        }
-
-    } catch (error) {
-        // Si no, se imprime el error en consola
-        console.log(error);
-    }
-
 }

@@ -264,12 +264,9 @@ export const CoordsCell = (planet: string) => {
                         }
 
                         {nthPlanet['restores_at'] &&
-                            <div className="flex flex-row justify-start items-center gap-2">
+                            <div className="flex flex-row justify-start items-center gap-2 w-max">
 
-                                <div className="flex flex-row items-center gap-2 font-mono">
-                                    <img src="/clock.png" alt="" />
-                                    {nthPlanet['restores_at'].split(" ")[1].split(".")[0]}
-                                </div>
+                                <RestoresAt restoresAt={nthPlanet['restores_at']} />
 
                                 {/* Reconstrucción manual */}
                                 <ButtonIcon
@@ -332,4 +329,24 @@ export const CoordsCell = (planet: string) => {
 
     // Retorno del componente dinámico
     return ComponentCallback;
+}
+
+interface RestoresAtParams {
+    restoresAt: string;
+}
+
+const RestoresAt: (config: RestoresAtParams) =>  (React.JSX.Element) = ({
+    restoresAt,
+}) => {
+
+    const [ hour, minute, second ] = restoresAt.split(" ")[1].split(".")[0].split(":")
+
+    const mer = Number(hour) <= 12 ? "AM" : "PM"
+
+    return (
+        <div className="flex flex-row items-center gap-2 font-mono">
+            <img src="/clock.png" alt="" />
+            {`${Number(hour) > 12 ? Number(hour) - 12 : (Number(hour) === 0 ? 12 : Number(hour))}:${minute}:${second} ${mer}`}
+        </div>
+    )
 }
