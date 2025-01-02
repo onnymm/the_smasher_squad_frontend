@@ -49,7 +49,7 @@ const Sidebar: () => (React.JSX.Element) = (() => {
 
                 {/* Encabezado de barra lateral */}
                 <div className="flex flex-row justify-between w-full h-14 sm:h-12">
-                    <h1>The Smasher Squad</h1>
+                    <img src="/logo.png" alt="The Smasher Squad" className="w-[200px] h-[42px]" />
                     <div className={`${isSidebarLocked ? "opacity-0 pointer-events-none" : "opacity-100"} transition-opacity size-14 sm:size-12`}>
                         <ButtonCloseSidebar icon={ArrowLeftIcon} callback={() => setIsSidebarOpen(false)} />
                     </div>
