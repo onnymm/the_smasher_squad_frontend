@@ -6,6 +6,7 @@ import { ArrowPathIcon, FlagIcon, PencilIcon, PlusIcon } from "@heroicons/react/
 import { ManageCoords } from "../../actions/AddCoords";
 import AttackPlanet from "../../actions/AttackPlanet";
 import RestorePlanet from "../../actions/RestorePlanet";
+import AvatarSmall from "../../avatar/AvatarSmall";
 
 interface TableCoordinatesParams {
     x: number | null;
@@ -220,7 +221,7 @@ export const CoordsCell = (planet: string) => {
                         </div>
 
                         {/* Botones de interacción con los datos */}
-                        {!nthPlanet['restores_at'] &&
+                        {!nthPlanet['restores_at'] && !nthPlanet['under_attack_since'] &&
                             <div className="group-[.coords-cell]:group-hover:h-10 flex flex-row justify-start items-center gap-2 opacity-0 group-[.coords-cell]:group-hover:opacity-100 h-0 ui-cell-cords">
 
                                 {/* Marcar como ocupado */}
@@ -260,6 +261,13 @@ export const CoordsCell = (planet: string) => {
                                     }
                                 />
 
+                            </div>
+                        }
+
+                        {!nthPlanet['restores_at'] && nthPlanet['under_attack_since'] &&
+                            <div className="flex flex-row justify-start items-center gap-2">
+                                <img src="/gun.png" alt="" />
+                                <AvatarSmall data={nthPlanet['attacker_avatar']} alt="Atacante" online />
                             </div>
                         }
 
