@@ -1,4 +1,4 @@
-import { ListBulletIcon } from "@heroicons/react/24/solid"
+import { FlagIcon } from "@heroicons/react/24/solid"
 import DataView from "../../components/data_visualizers/DataView"
 import {  CoordsCell, TablePlayer, XPLevel } from "../../components/widgets/custom_widgets/ManageCoords"
 const Enemies: () => (React.JSX.Element) = () => {
@@ -107,8 +107,8 @@ const Enemies: () => (React.JSX.Element) = () => {
         <DataView
             backendPath="/alliances/enemies"
             viewConfig={viewConfig}
-            noRecordsIcon={ListBulletIcon}
-            noRecordsMessage="No hay coordenadas"
+            noRecordsIcon={FlagIcon}
+            noRecordsMessage="No estamos en guerra"
             showPagination={false}
         />
     )
