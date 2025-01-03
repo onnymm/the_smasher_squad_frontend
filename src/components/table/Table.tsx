@@ -12,12 +12,12 @@ import useSortingFields from "../../hooks/useSortingFields"; // eslint-disable-l
 interface TableParams {
     data: ResponseDataStructure; // Matriz de datos a renderizar.
     viewConfig: ViewConfig[]; // Configuración de vista de datos.
-    sortingFieldKey: string | undefined; // Indicador de cuál columna está ordenando los datos actualmente.
-    ascending: boolean | undefined; // Indicador de dirección de ordenamiento a mostrar en caso de que la columna esté ordenando datos actualmente, obtenido desde el Custom Hook {@link useSortingFields}.
-    visibleColumns: OptionObject[]; // Estado {@link OptionObject OptionObject[ ]} de columnas visibles.
-    setSortingColumn: (key: string) => void; // Función de cambio de estado para establecer esta columna como ordenadora de datos, obtenida desde el Custom Hook {@link useSortingFields}.
-    loading: boolean; // Indicador de estado de carga, en espera de respuesta del backend.
-    tableRef: React.RefObject<HTMLDivElement>; // Referencia a utilizar para reiniciar deslizamiento en los datos de la tabla.
+    sortingFieldKey?: string | undefined; // Indicador de cuál columna está ordenando los datos actualmente.
+    ascending?: boolean | undefined; // Indicador de dirección de ordenamiento a mostrar en caso de que la columna esté ordenando datos actualmente, obtenido desde el Custom Hook {@link useSortingFields}.
+    visibleColumns?: OptionObject[]; // Estado {@link OptionObject OptionObject[ ]} de columnas visibles.
+    setSortingColumn?: (key: string) => void; // Función de cambio de estado para establecer esta columna como ordenadora de datos, obtenida desde el Custom Hook {@link useSortingFields}.
+    loading?: boolean; // Indicador de estado de carga, en espera de respuesta del backend.
+    tableRef?: React.RefObject<HTMLDivElement>; // Referencia a utilizar para reiniciar deslizamiento en los datos de la tabla.
     noRecordsIcon: IconType; // Ícono descriptivo de ausencia de datos en la tabla.
     noRecordsMessage: string; // Mensaje descriptivo que indica la ausencia de datos.
 }

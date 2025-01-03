@@ -10,8 +10,8 @@ interface TableColumnParams {
     title?: string; // Título de la columna.
     canSort?: boolean; // Indicador de si la columna puede ordenar datos en base al campo que representa.
     isSorting: boolean; // Indicador de si la columna está ordenando datos actualmente, obtenido desde el Custom Hook {@link useSortingFields}.
-    ascending: boolean | undefined; // Indicador de dirección de ordenamiento a mostrar en caso de que la columna esté ordenando datos actualmente, obtenido desde el Custom Hook {@link useSortingFields}.
-    setSortingColumn: (key: string) => void; // Función de cambio de estado para establecer esta columna como ordenadora de datos, obtenida desde el Custom Hook {@link useSortingFields}.
+    ascending?: boolean | undefined; // Indicador de dirección de ordenamiento a mostrar en caso de que la columna esté ordenando datos actualmente, obtenido desde el Custom Hook {@link useSortingFields}.
+    setSortingColumn?: (key: string) => void; // Función de cambio de estado para establecer esta columna como ordenadora de datos, obtenida desde el Custom Hook {@link useSortingFields}.
     resizeColumn: (columnKey: string, width: number | null) => void; // Función para redimensionar la columna, obtenida desde el Custom Hook {@link useResize}.
 }
 
@@ -103,8 +103,8 @@ interface ColumnContentParams {
     content?: string;
     canSort?: boolean;
     isSorting: boolean;
-    ascending: boolean | undefined;
-    setSortingColumn: (key: string) => void;
+    ascending?: boolean | undefined;
+    setSortingColumn?: (key: string) => void;
     // resizeColumn: (columnKey: string, width: number) => void;
 }
 
@@ -132,13 +132,13 @@ const ColumnContent = React.memo(({
                 ref={resizableRef}
                 style={initialWidth.current ? {width: columnWidth.current as number} : {width: '100%'}}
                 className="relative flex flex-row items-center gap-2 py-2 pr-10 pl-4 min-w-12 h-full overflow-hidden ui-table-column"
-                onClick={canSort ? () => setSortingColumn(columnKey) : () => (null)}
+                onClick={canSort ? () => (setSortingColumn ? setSortingColumn(columnKey) : null) : () => (null)}
             >
                 <span className="text-ellipsi">{content ? content : ""}</span>
 
             </div>
                 {/* Ícono del estatus de orden */}
-                {canSort
+                {(canSort && ascending !== undefined) || isSorting
                     ? (isSorting
                         ? <SortingDirection ascending={ascending} />
                         : <SortingIndicator />

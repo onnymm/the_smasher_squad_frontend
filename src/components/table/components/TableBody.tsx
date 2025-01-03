@@ -5,7 +5,7 @@ import TableRow from "./TableRow";
 interface TableBodyParams {
     data: ResponseDataStructure; // Matriz de datos a renderizar.
     viewConfig: ViewConfig[]; // Configuración de vista de datos.
-    visibleColumns: OptionObject[]; // Estado {@link OptionObject OptionObject[ ]} de columnas visibles.
+    visibleColumns?: OptionObject[]; // Estado {@link OptionObject OptionObject[ ]} de columnas visibles.
     columnWidths: WidthsValues; // Estado de ancho de columnas, obtenido desde el Custom Hook {@link useColumnWidths}.
 }
 

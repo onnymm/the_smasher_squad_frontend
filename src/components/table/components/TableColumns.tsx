@@ -5,10 +5,10 @@ import useResize from "../../../hooks/useResize"; // eslint-disable-line
 
 interface TableColumnsParams {
     viewConfig: ViewConfig[]; // Configuración de vista de datos.
-    visibleColumns: OptionObject[]; // Estado {@link OptionObject OptionObject[ ]} de columnas visibles.
+    visibleColumns?: OptionObject[]; // Estado {@link OptionObject OptionObject[ ]} de columnas visibles.
     sortingFieldKey: string | undefined; // Indicador de cuál columna está ordenando los datos actualmente.
-    ascending: boolean | undefined; // Indicador de dirección de ordenamiento a mostrar en caso de que la columna esté ordenando datos actualmente, obtenido desde el Custom Hook {@link useSortingFields}.
-    setSortingColumn: (key: string) => void; // Función de cambio de estado para establecer esta columna como ordenadora de datos, obtenida desde el Custom Hook {@link useSortingFields}.
+    ascending?: boolean | undefined; // Indicador de dirección de ordenamiento a mostrar en caso de que la columna esté ordenando datos actualmente, obtenido desde el Custom Hook {@link useSortingFields}.
+    setSortingColumn?: (key: string) => void; // Función de cambio de estado para establecer esta columna como ordenadora de datos, obtenida desde el Custom Hook {@link useSortingFields}.
     resizeColumn: (columnKey: string, width: number | null) => void; // Función para redimensionar la columna, obtenida desde el Custom Hook {@link useResize}.
 }
 
@@ -49,7 +49,7 @@ const TableColumns = ({
                     viewConfig.map(
                         (column, i) => {
 
-                            const isVisible = visibleColumns.find( (item) => (item.key == column.key) )
+                            const isVisible = visibleColumns?.find( (item) => (item.key == column.key) )
 
                             if ( column.tableVisible === undefined || isVisible?.active ) {
                                 return (

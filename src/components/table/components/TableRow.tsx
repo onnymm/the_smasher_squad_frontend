@@ -5,7 +5,7 @@ import TableCell from "./TableCell";
 interface TableRowParams {
     record: GenericObject;  // Objeto de registro. Este es un objeto perteneciente a la matriz de registros recibida desde el backend.
     viewConfig: ViewConfig[]; // Configuración de vista de datos.
-    visibleColumns: OptionObject[]; // Estado {@link OptionObject OptionObject[ ]} de columnas visibles.
+    visibleColumns?: OptionObject[]; // Estado {@link OptionObject OptionObject[ ]} de columnas visibles.
     fields: DataField[]; // Datos del tipo de campos a renderizar.
     columnWidths: WidthsValues; // Estado de ancho de columnas, obtenido desde el Custom Hook {@link useColumnWidths}.
 }
@@ -45,7 +45,7 @@ const TableRow = ({
                             // Mostrar columna desde configuración
                             const configShowColumn = recordConfig.tableVisible === undefined
                             // Columna visible
-                            const isVisible = visibleColumns.find(
+                            const isVisible = visibleColumns?.find(
                                 (item) => (item.key === recordConfig.key)
                             )
                             return ( configShowColumn || isVisible?.active )

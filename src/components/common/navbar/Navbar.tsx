@@ -1,6 +1,7 @@
 import ToggleDarkMode from "../../ui/toggle/ToggleDarkMode";
 import NavbarProfile from "./NavbarProfile";
 import ButtonSidebarMenu from "../base_interface_components/ButtonSidebarMenu";
+import { useNavigate } from "react-router-dom";
 
 /** 
  *  ## Barra superior de interfaz base
@@ -13,10 +14,12 @@ import ButtonSidebarMenu from "../base_interface_components/ButtonSidebarMenu";
  */ 
 const Navbar: () => (React.JSX.Element) = () => {
 
+    const navigateTo = useNavigate()
+
     return (
         <nav className="top-0 z-10 sticky flex flex-row justify-between bg-white dark:bg-[#31224b] shadow w-full h-20 transition select-none">
             <div className="flex flex-row justify-between items-center px-4 w-72 h-full">
-                <img src="/logo.png" alt="The Smasher Squad"  className="w-[186px] h-[42px]" />
+                <img src="/logo.png" alt="The Smasher Squad"  className="w-[186px] h-[42px] cursor-pointer" onClick={() => navigateTo("/")} />
                 <ButtonSidebarMenu />
             </div>
             <div className="flex flex-row gap-4 px-4 w-min h-full">
