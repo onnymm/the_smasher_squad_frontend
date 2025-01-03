@@ -2,11 +2,12 @@ import { useContext } from "react";
 import AvatarMedium from "../../avatar/AvatarMedium";
 import { ModalContext } from "../../../contexts/modalContext";
 import ButtonIcon from "../../ui/button/ButtonIcon";
-import { ArrowPathIcon, FlagIcon, PencilIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { ArrowPathIcon, ArrowUturnLeftIcon, FlagIcon, PencilIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { ManageCoords } from "../../actions/AddCoords";
 import AttackPlanet from "../../actions/AttackPlanet";
 import RestorePlanet from "../../actions/RestorePlanet";
 import AvatarSmall from "../../avatar/AvatarSmall";
+import { UserContext } from "../../../contexts/userContext";
 
 interface TableCoordinatesParams {
     x: number | null;
@@ -190,6 +191,8 @@ export const CoordsCell = (planet: string) => {
     // Obtención de estado y función de cambio de estado de contenido de modal
     const { setModalContent } = useContext(ModalContext);
 
+    const { user} = useContext(UserContext)
+
     // Creación de componente dinámico
     const ComponentCallback = ({
         [ planet ]: nthPlanet,
@@ -268,6 +271,23 @@ export const CoordsCell = (planet: string) => {
                             <div className="flex flex-row justify-start items-center gap-2">
                                 <img src="/gun.png" alt="" />
                                 <AvatarSmall data={nthPlanet['attacker_avatar']} alt="Atacante" online />
+                                {nthPlanet['attacker_user'] === user &&
+                                    <ButtonIcon
+                                        icon={ArrowUturnLeftIcon}
+                                        onClick={() => setModalContent(
+                                            <AttackPlanet
+                                                colonyId={nthPlanet['id']}
+                                                enemyName={name}
+                                                x={nthPlanet['x']}
+                                                y={nthPlanet['y']}
+                                                sscolor={nthPlanet['color']}
+                                                enemyAvatar={avatar}
+                                                starbase_level={nthPlanet['starbase_level']}
+                                                planet={nthPlanet['planet']}
+                                            />
+                                        )}
+                                    />
+                                }
                             </div>
                         }
 
