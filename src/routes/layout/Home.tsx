@@ -8,6 +8,11 @@ import { TablePlayer, XPLevel } from "../../components/widgets/custom_widgets/Ma
 
 interface DataFromAPI {
     'enemy_alliance_name': string;
+    'enemy_alliance_description': string;
+    'enemy_alliance_level': string;
+    'enemy_alliance_wars_won': number;
+    'enemy_alliance_wars_lost': number;
+    'enemy_alliance_farmeable_wp': number;
     'enemy_alliance_logo': {
         shape: string;
         pattern: string;
@@ -61,25 +66,78 @@ const Home: () => (React.JSX.Element) = () => {
     )
 
     return (
-        <div id="page" className="flex flex-col items-center gap-4 h-full overflow-y-hidden">
+        <div id="page" className="flex flex-col items-center gap-2 h-full overflow-y-hidden">
             <div className="h-10">
 
+                {/* Botón para actualizar alianza en guerra */}
                 <ButtonTextIcon type="primary" icon={ArrowPathIcon} onClick={getAllianceStats} disabled={loading}>
                     Refrescar
                 </ButtonTextIcon>
             </div>
+
             {data &&
-                <div className="flex flex-row items-center">
-                </div>
-            }
-            {data &&
-                <div className="flex flex-col gap-2 pb-4 w-min h-[calc(100%_-_2.5rem)]">
-                    <div className="flex flex-row justify-center items-center gap-2 w-full">
-                    <img className="size-12" src={`https://cdn.galaxylifegame.net/content/img/alliance_flag/AllianceLogos/flag_${data['enemy_alliance_logo']['shape']}_${data['enemy_alliance_logo']['pattern']}_${data['enemy_alliance_logo']['icon']}.png`} alt="" />
-                        <span className="text-2xl">{data['enemy_alliance_name']}</span>
+                <div className="flex flex-col items-center gap-2 pb-4 w-min h-[calc(100%_-_4.5rem)]">
+                    <div className="flex flex-col justify-center items-center border-gray-500/30 bg-slate-800/70 shadow-md px-6 py-2 border rounded-xl w-max">
+
+                        <div className="flex flex-row items-center gap-6 w-max">
+                            {/* Nombre y logo de la alianza */}
+                            <div className="flex items-center gap-2">
+                                <img className="size-12" src={`https://cdn.galaxylifegame.net/content/img/alliance_flag/AllianceLogos/flag_${data['enemy_alliance_logo']['shape']}_${data['enemy_alliance_logo']['pattern']}_${data['enemy_alliance_logo']['icon']}.png`} alt="" />
+                                <span className="text-2xl">{data['enemy_alliance_name']}</span>
+                            </div>
+
+                            {/* Guerras ganadas y perdidas */}
+                            <div className="flex items-center gap-2">
+                                <img src="/gun.png" alt="Guerras ganadas" className="size-6" />
+                                <div className="flex flex-col items-center">
+                                    <div className="flex items-center gap-2">
+                                        Guerras ganadas: <span className="text-main-500">{data['enemy_alliance_wars_won']}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        Guerras perdidas: <span className="text-main-500">{data['enemy_alliance_wars_lost']}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Ratio de guerra */}
+                            <div className="flex items-center gap-2">
+                                <img src="/target.png" alt="Ratio" className="size-6" />
+                                Ratio: <span className="text-main-500">{(data['enemy_alliance_wars_won'] * 100 / (data['enemy_alliance_wars_lost'] + data['enemy_alliance_wars_won'])).toFixed(2)}</span>
+                            </div>
+                        </div>
+                        <div className="flex flex-row items-center gap-6 w-max">
+                            {/* Descripción de la alianza */}
+                            <div className="flex justify-center w-full h-8">
+                                <span className="text-gray-500">{`${data['enemy_alliance_description']}`}</span>
+                            </div>
+                        </div>
+                        <div className="flex flex-row items-center gap-6 w-max">
+
+                            {/* Miembros */}
+                            <div className="flex items-center h-8">
+                                <img src="/alliance.png" alt="Miembros" className="size-6" />
+                                <span>Miembros: <span className="text-main-500">{data['enemy_alliance_members']['count']}</span></span>
+                            </div>
+
+                            {/* Nivel */}
+                            <div className="flex items-center gap-2">
+                                <img src="/wpstar.png" alt="Nivel de alianza" className="size-6" />
+                                Nivel <span className="text-main-500">{data['enemy_alliance_level']}</span>
+                            </div>
+
+                            {/* Estrellas recolectables */}
+                            <div className="flex items-center gap-2">
+                                <img src="/wpstar.png" alt="Puntos de guerra recolectables" className="size-6" />
+                                Estrellas farmeables: <span className="text-main-500">~{data['enemy_alliance_farmeable_wp']}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div className="w-full h-[calc(100%_-_5rem)]">
-                        <Table data={data['enemy_alliance_members']} loading={loading} viewConfig={viewConfig} noRecordsIcon={FlagIcon} noRecordsMessage="No estamos en guerra" />
+
+                    {/* Tabla de miembros */}
+                    <div className="flex flex-col items-center w-full h-[calc(100%_-_6.25rem)]">
+                        <div className="h-full">
+                            <Table data={data['enemy_alliance_members']} loading={loading} viewConfig={viewConfig} noRecordsIcon={FlagIcon} noRecordsMessage="No estamos en guerra" />
+                        </div>
                     </div>
                 </div>
             }

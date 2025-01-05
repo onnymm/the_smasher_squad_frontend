@@ -127,16 +127,16 @@ export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
                 <StarBase planet={planet} starbase_level={starbase_level} />
             </div>
 
+            {/* Selección de color de sistema solar */}
+            <Select options={solarSystemColorOptions} setOptions={setSolarSystemColorOptions} icon={ListBulletIcon} iconActive={CheckIcon} mode='switch'>
+                Color de sistema solar
+            </Select>
+
             {/* Campos de coordenadas */}
             <div className="flex flex-row gap-2">
                 <InputNumeric value={inputX} setValue={setInputX} visiblePlaceholder="X" onEnter={triggerSendCoords} onChange={(_, event) => (setInputX(Number(event.target.value)))} min={0} max={2000} />
                 <InputNumeric value={inputY} setValue={setInputY} visiblePlaceholder="Y" onEnter={triggerSendCoords} onChange={(_, event) => (setInputY(Number(event.target.value)))} min={0} max={2000} />
             </div>
-
-            {/* Selección de color de sistema solar */}
-            <Select options={solarSystemColorOptions} setOptions={setSolarSystemColorOptions} icon={ListBulletIcon} iconActive={CheckIcon} mode='switch'>
-                Color de sistema solar
-            </Select>
 
             {/* Botón de envío de datos */}
             <ButtonTextIcon

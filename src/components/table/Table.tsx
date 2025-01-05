@@ -73,7 +73,7 @@ const Table = ({
             <div id="table-visible-area" className={`${isDataEmpty ? "w-full" : "w-max max-w-full"} relative border-gray-500/30 bg-slate-800/70 shadow-md p-2 border rounded-xl transition duration-100 overflow-hidden scrollbar-hide size-full`}>
                 
                 {/* Tabla con datos */}
-                <div id="table-data" className={`${loading ? 'flex-grow flex opacity-0 pointer-events-none' : ""} ${isDataEmpty ? "w-full" : "max-w-max"} ui-table-data overflow-scroll scrollbar-hide relative flex rounded-lg min-h-full h-full`} ref={tableRef}>
+                <div id="table-data" className={`${loading ? 'flex-grow flex opacity-0 pointer-events-none' : ""} ${isDataEmpty ? "w-full" : "max-w-max"} ui-table-data overflow-scroll relative flex rounded-lg min-h-full h-full`} ref={tableRef}>
 
                     {/* Contenedor para efecto de sombra en encabezado */}
                     <div id="table-header" className={`${loading || isDataEmpty ? "flex-grow flex opacity-0" : ""} z-10 h-10 absolute pointer-events-none shadow-md dark:border-none rounded-lg w-full`}/>
