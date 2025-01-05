@@ -102,7 +102,7 @@ const Home: () => (React.JSX.Element) = () => {
                             {/* Ratio de guerra */}
                             <div className="flex items-center gap-2">
                                 <img src="/target.png" alt="Ratio" className="size-6" />
-                                Ratio: <span className="text-main-500">{(data['enemy_alliance_wars_won'] * 100 / (data['enemy_alliance_wars_lost'] + data['enemy_alliance_wars_won'])).toFixed(2)}</span>
+                                Ratio: <span className="text-main-500">{(data['enemy_alliance_wars_won'] * 100 / (data['enemy_alliance_wars_lost'] + data['enemy_alliance_wars_won'])).toFixed(2)}%</span>
                             </div>
                         </div>
                         <div className="flex flex-row items-center gap-6 w-max">

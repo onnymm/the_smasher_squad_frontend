@@ -1,13 +1,13 @@
 import { FlagIcon } from "@heroicons/react/24/solid"
 import DataView from "../../components/data_visualizers/DataView"
-import {  CoordsCell, TablePlayer, XPLevel } from "../../components/widgets/custom_widgets/ManageCoords"
+import {  CoordsCell, PlayerWidget, XPLevel } from "../../components/widgets/custom_widgets/ManageCoords"
 const Enemies: () => (React.JSX.Element) = () => {
 
     const viewConfig: ViewConfig[] = [
         {
             key: 'name',
             displayName: 'Jugador',
-            type: TablePlayer,
+            type: PlayerWidget,
             canSort: false,
         },
         {

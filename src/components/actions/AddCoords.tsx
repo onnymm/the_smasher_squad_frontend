@@ -120,7 +120,7 @@ export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
             {/* Descripción visual de los datos del planeta/colonia */}
             <div className="flex flex-row justify-between">
                 {/* Jugador */}
-                <TablePlayer name={enemyName} avatar={enemyAvatar} />
+                <TablePlayer name={enemyName} avatar={enemyAvatar} online={false} />
                 {/* Color del sistema solar */}
                 {solarSystemColorKey &&
                     <SolarSystem color={solarSystemColorKey as SolarColorOption} />

@@ -2,12 +2,15 @@ import { useContext } from "react";
 import AvatarMedium from "../../avatar/AvatarMedium";
 import { ModalContext } from "../../../contexts/modalContext";
 import ButtonIcon from "../../ui/button/ButtonIcon";
-import { ArrowPathIcon, ArrowUturnLeftIcon, FlagIcon, PencilIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { ArrowPathIcon, ArrowUturnLeftIcon, DevicePhoneMobileIcon, FlagIcon, PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { ManageCoords } from "../../actions/AddCoords";
 import AttackPlanet from "../../actions/AttackPlanet";
 import RestorePlanet from "../../actions/RestorePlanet";
 import AvatarSmall from "../../avatar/AvatarSmall";
 import { UserContext } from "../../../contexts/userContext";
+import ButtonTextIcon from "../../ui/button/ButtonTextIcon";
+import MarkOnOffline from "../../actions/MarkOnOffline";
+import DeleteCoords from "../../actions/DeleteCoords";
 
 interface TableCoordinatesParams {
     x: number | null;
@@ -15,8 +18,11 @@ interface TableCoordinatesParams {
 }
 
 interface TablePlayerParams {
+    'enemy_level'?: number;
+    'enemy_id'?: number;
     name: string;
     avatar: string;
+    online: boolean;
 }
 
 interface AddedByParams {
@@ -63,14 +69,55 @@ export const TableCoordinates: (config: TableCoordinatesParams) => (React.JSX.El
     )
 }
 
+
+export const PlayerWidget: (config: TablePlayerParams) => (React.JSX.Element) = ({
+    name,
+    avatar,
+    online,
+    enemy_id,
+    enemy_level,
+}) => {
+
+    const { setModalContent } = useContext(ModalContext)
+
+    return (
+        <div className="flex flex-col justify-center items-start gap-2 h-24 group player-cell">
+
+            <TablePlayer name={name} avatar={avatar} online={online} />
+
+            <div className="group-[.player-cell]:group-hover:h-10 flex flex-row justify-start items-center gap-2 opacity-0 group-[.player-cell]:group-hover:opacity-100 h-0">
+                <ButtonTextIcon
+                    icon={DevicePhoneMobileIcon}
+                    type={online ? "primary" : "secondary"}
+                    onClick={() => {
+                        setModalContent(
+                            <MarkOnOffline
+                                enemyId={enemy_id as number}
+                                enemyName={name}
+                                enemyAvatar={avatar}
+                                online={online}
+                                enemyLevel={enemy_level as number}
+                            />
+                        )
+                    }}
+                >
+                    {`${online ? "desconectado" : "conectado"}`}
+                </ButtonTextIcon>
+            </div>
+        </div>
+    )
+}
+
+
 export const TablePlayer: (config: TablePlayerParams) => (React.JSX.Element) = ({
     name,
     avatar,
+    online,
 }) => {
 
     return (
         <div className="flex flex-row justify-start items-center gap-2 w-min select-none">
-            <AvatarMedium data={avatar} online={false} />
+            <AvatarMedium data={avatar} online={online} />
             <span className="text-ellipsis">{name}</span>
         </div>
     )
@@ -198,6 +245,7 @@ export const CoordsCell = (planet: string) => {
         [ planet ]: nthPlanet,
         name,
         avatar,
+        online,
     }: Record<string, any>) => {
 
         // Si no existe planeta se retorna indicador de nulidad de éste
@@ -243,6 +291,7 @@ export const CoordsCell = (planet: string) => {
                                             planet={nthPlanet['planet']}
                                         />
                                     )}
+                                    disabled={online}
                                 />
 
                                 {/* Editar información */}
@@ -262,6 +311,24 @@ export const CoordsCell = (planet: string) => {
                                             />
                                         )
                                     }
+                                />
+
+                                {/* Eliminar coordenadas */}
+                                <ButtonIcon
+                                    icon={TrashIcon}
+                                    onClick={() => {
+                                        setModalContent(
+                                            <DeleteCoords
+                                                colonyId={nthPlanet['id']}
+                                                enemyName={name}
+                                                sscolor={nthPlanet['color']}
+                                                enemyAvatar={avatar}
+                                                starbase_level={nthPlanet['starbase_level']}
+                                                planet={nthPlanet['planet']}
+                                            />
+                                        )
+                                    }}
+                                    type="danger"
                                 />
 
                             </div>
