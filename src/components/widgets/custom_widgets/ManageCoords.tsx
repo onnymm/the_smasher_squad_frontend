@@ -314,22 +314,24 @@ export const CoordsCell = (planet: string) => {
                                 />
 
                                 {/* Eliminar coordenadas */}
-                                <ButtonIcon
-                                    icon={TrashIcon}
-                                    onClick={() => {
-                                        setModalContent(
-                                            <DeleteCoords
-                                                colonyId={nthPlanet['id']}
-                                                enemyName={name}
-                                                sscolor={nthPlanet['color']}
-                                                enemyAvatar={avatar}
-                                                starbase_level={nthPlanet['starbase_level']}
-                                                planet={nthPlanet['planet']}
-                                            />
-                                        )
-                                    }}
-                                    type="danger"
-                                />
+                                {nthPlanet['x'] !== null && nthPlanet['y'] !== null &&
+                                    <ButtonIcon
+                                        icon={TrashIcon}
+                                        onClick={() => {
+                                            setModalContent(
+                                                <DeleteCoords
+                                                    colonyId={nthPlanet['id']}
+                                                    enemyName={name}
+                                                    sscolor={nthPlanet['color']}
+                                                    enemyAvatar={avatar}
+                                                    starbase_level={nthPlanet['starbase_level']}
+                                                    planet={nthPlanet['planet']}
+                                                />
+                                            )
+                                        }}
+                                        type="danger"
+                                    />
+                                }
 
                             </div>
                         }
