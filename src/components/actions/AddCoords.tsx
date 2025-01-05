@@ -91,6 +91,8 @@ export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
     const [ inputX, setInputX ] = useState<undefined | number>(x);
     const [ inputY, setInputY ] = useState<undefined | number>(y);
 
+    console.log(inputX, inputY)
+
     // Función a ejecutar para envío de cambios al API
     const triggerSendCoords = () => {
         // Si existen valores en X y Y
@@ -143,7 +145,7 @@ export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
                 icon={CheckIcon}
                 onClick={triggerSendCoords}
                 type="primary"
-                disabled={ !inputX || !inputY || saved === undefined }
+                disabled={ inputX === undefined || inputY === undefined || saved === undefined }
             >
                 Guardar
             </ButtonTextIcon>

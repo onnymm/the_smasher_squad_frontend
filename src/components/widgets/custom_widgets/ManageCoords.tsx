@@ -210,7 +210,7 @@ export const CoordsCell = (planet: string) => {
         } else {
 
             // Si existen coordenadas
-            if ( (nthPlanet['x'] && nthPlanet['y']) || (nthPlanet['planet'] === 0) ) {
+            if ( (nthPlanet['x'] !== null && nthPlanet['y'] !== null) || (nthPlanet['planet'] === 0) ) {
 
                 // Se retorna interfaz para manejo de datos
                 return (
