@@ -110,6 +110,7 @@ const Enemies: () => (React.JSX.Element) = () => {
             noRecordsIcon={FlagIcon}
             noRecordsMessage="No estamos en guerra"
             showPagination={false}
+            loadStatus={false}
         />
     )
 }

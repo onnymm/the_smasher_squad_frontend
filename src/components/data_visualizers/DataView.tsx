@@ -19,6 +19,7 @@ interface DataViewParams {
     noRecordsIcon: IconType;
     noRecordsMessage: string;
     showPagination?: boolean;
+    loadStatus?: boolean;
 }
 
 const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
@@ -30,6 +31,7 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
     noRecordsIcon: NoRecordsIcon = ListBulletIcon,
     noRecordsMessage = COMMON_LEGEND.NO_RECORDS_MESSAGE,
     showPagination = true,
+    loadStatus = true,
 }) => {
 
     // Función para crear o actualizar filtro
@@ -114,7 +116,9 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
     useEffect(
         () => {
             // Se establece el estado de carga a verdadero
-            setLoading(true);
+            if ( loadStatus ) {
+                setLoading(true);
+            }
 
             // Solicitud de datos al backend
             getTableData(
@@ -128,7 +132,7 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
                     'search_criteria': filter.criteria
                 },
             )
-        }, [backendPath, itemsPerPage, sortingFieldKey, page, ascending, filter, reload]
+        }, [backendPath, itemsPerPage, sortingFieldKey, page, ascending, filter, reload, loadStatus]
     )
 
     // Establecer carga a falso después de recibir los datos tras nueva solicitud
