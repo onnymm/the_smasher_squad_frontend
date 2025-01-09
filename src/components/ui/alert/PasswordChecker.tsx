@@ -25,7 +25,7 @@ const PasswordChecker: (config: PasswordCheckerParams) => (React.JSX.Element | n
     if ( !isMinLenght || !containsUpper || !containsLower || !containsNumber ) {
 
         // Se indica que la contraseña nueva es válida
-        setIsValidPassword(true)
+        setIsValidPassword(false)
 
         return (
             <Alert type="error">
@@ -47,7 +47,7 @@ const PasswordChecker: (config: PasswordCheckerParams) => (React.JSX.Element | n
     } else {
 
         // Se indica que la contraseña nueva es inválida
-        setIsValidPassword(false);
+        setIsValidPassword(true);
 
         return null;
     }

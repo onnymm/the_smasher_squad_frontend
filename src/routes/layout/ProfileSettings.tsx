@@ -72,14 +72,14 @@ const ProfileSettings: () => (React.JSX.Element) = () => {
 
                     {/* Campos de contraseña actual, confirmar contraseña y nueva contraseña */}
                     <InputPassword value={inputPassword} setValue={setInputPassword} visiblePlaceholder="Contraseña actual" />
-                    <InputPassword value={inputConfirmPassword} setValue={setInputConfirmPassword} visiblePlaceholder="Confirma la contraseña" />
                     <InputPassword value={inputNewPassword} setValue={setInputNewPassword} visiblePlaceholder="Nueva contraseña" />
+                    <InputPassword value={inputConfirmPassword} setValue={setInputConfirmPassword} visiblePlaceholder="Confirma la contraseña" />
 
                     {/* Indicador de requisitos faltantes de contraseña */}
                     <PasswordChecker password={inputNewPassword} setIsValidPassword={setIsValidPassword} />
 
                     {/* Botón de cambiar contraseña */}
-                    <ButtonTextIcon icon={CheckIcon} onClick={() => changePassword(inputPassword, inputNewPassword, setIsWrongPassword, setToken)} disabled={(inputPassword === "" || inputConfirmPassword === "" || inputPassword !== inputConfirmPassword) || isValidPassword} type="primary">
+                    <ButtonTextIcon icon={CheckIcon} onClick={() => changePassword(inputPassword, inputNewPassword, setIsWrongPassword, setToken)} disabled={(inputPassword.length < 6 || inputNewPassword === "" || inputConfirmPassword === "" || inputNewPassword !== inputConfirmPassword) || !isValidPassword} type="primary">
                         Cambiar contraseña
                     </ButtonTextIcon>
                     {/* Indicador de que la contraseña actual es incorrecta */}
