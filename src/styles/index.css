@@ -116,6 +116,14 @@ body {
     .text-theme {
         @apply text-slate-600 dark:text-gray-300;
     }
+
+    .animation-paused {
+        animation-play-state: paused;
+    }
+
+    .animation-running {
+        animation-play-state: running;
+    }
 }
 
 /* Desaparición de botones de incrementar y decrementar */

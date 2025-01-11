@@ -15,6 +15,12 @@ export default {
     safelist: [
         sidebarWidthClassName,
         "-translate-y-[50%]",
+        'group-[.coords-cell]:group-hover:drop-shadow-[0_0_4px_#c3f9ff80]',
+        'group-[.coords-cell]:group-hover:drop-shadow-[0_0_4px_#ff6c6c80]',
+        'group-[.coords-cell]:group-hover:drop-shadow-[0_0_4px_#76ffd180]',
+        'group-[.coords-cell]:group-hover:drop-shadow-[0_0_4px_#6cccff80]',
+        'group-[.coords-cell]:group-hover:drop-shadow-[0_0_4px_#e459fc80]',
+        'group-[.coords-cell]:group-hover:drop-shadow-[0_0_4px_#fffa6c80]',
     ],
 
     theme: {
@@ -46,6 +52,7 @@ export default {
             },
             animation : {
                 'loading-spin': 'spin 1s infinite ease-in-out',
+                'star-spin': 'spin 30s infinite linear'
             },
             transitionProperty: {
                 width: 'width',

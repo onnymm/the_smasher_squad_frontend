@@ -65,7 +65,7 @@ export const TableCoordinates: (config: TableCoordinatesParams) => (React.JSX.El
         coords = `${x},${y}`
 
     return (
-        <span className="font-mono">{coords}</span>
+        <span className="group-[.coords-cell]:group-hover:drop-shadow-[0_0_4px_cyan] font-mono transition-all duration-300">{coords}</span>
     )
 }
 
@@ -85,7 +85,7 @@ export const PlayerWidget: (config: TablePlayerParams) => (React.JSX.Element) = 
 
             <TablePlayer name={name} avatar={avatar} online={online} />
 
-            <div className="group-[.player-cell]:group-hover:h-10 flex flex-row justify-start items-center gap-2 opacity-0 group-[.player-cell]:group-hover:opacity-100 h-0">
+            <div className="group-[.player-cell]:group-hover:h-10 flex flex-row justify-start items-center gap-2 opacity-0 group-[.player-cell]:group-hover:opacity-100 group-[.coords-cell]:group-hover:opacity-100 h-0 transition-[opacity_0.15s_0.3s,_height_0.3s] duration-300">
                 <ButtonTextIcon
                     icon={DevicePhoneMobileIcon}
                     type={online ? "primary" : "secondary"}
@@ -151,7 +151,7 @@ export const StarBase: (config: StarBaseParams) => (React.JSX.Element) = ({
     }
 
     return (
-        <div className="flex flex-row justify-start items-center gap-2 w-min h-8">
+        <div className="flex flex-row justify-start items-center gap-2 group-[.coords-cell]:group-hover:drop-shadow-[0_0_4px_cyan] w-min h-8 transition-all duration-300">
             <img src={sbImage} alt={`Base estelar nivel ${starbaseLevel}`} className="min-w-8 h-full" />
             <span>{starbaseLevel}</span>
         </div>
@@ -183,9 +183,18 @@ export const SolarSystem: (config: SolarSystemParams) => (React.JSX.Element | nu
         'yellow': 'amarillo'
     }
 
+    const dropShadowColor = {
+        'white': '#c3f9ff',
+        'red': '#ff6c6c',
+        'green': '#76ffd1',
+        'blue': '#6cccff',
+        'purple': '#e459fc',
+        'yellow': '#fffa6c'
+    }
+
     if ( color ) {
         return (
-            <img src={`/ss${color}.png`} alt={`Sistema solar ${solarSystemColor[color]}`} className="min-w-10 h-10" />
+            <img src={`/ss${color}.png`} alt={`Sistema solar ${solarSystemColor[color]}`} className={`group-[.coords-cell]:group-hover:!animation-running min-w-10 h-10 animate-star-spin animation-paused group-[.coords-cell]:group-hover:drop-shadow-[0_0_4px_${dropShadowColor[color]}80] transition-all duration-300`} />
         )
     } else {
         return null;
@@ -198,7 +207,7 @@ export const TableAddedBy: (config: AddedByParams) => (React.JSX.Element) = ({
 }) => {
 
     return (
-        <div className="flex flex-row justify-start items-center gap-2 w-min select-none">
+        <div className="flex flex-row justify-start items-center gap-2 group-[.coords-cell]:group-hover:drop-shadow-[0_0_4px_cyan] w-min transition-all duration-300 select-none">
             <AvatarMedium data={create_avatar} online={false} />
             <span className="text-ellipsis">{create_user}</span>
         </div>
@@ -262,7 +271,7 @@ export const CoordsCell = (planet: string) => {
 
                 // Se retorna interfaz para manejo de datos
                 return (
-                    <div className="flex flex-col justify-center items-center gap-2 h-24 coords-cell group">
+                    <div className="flex flex-col justify-center items-center gap-2 px-2 h-24 transition-height duration-300 coords-cell group">
 
                         {/* Vista previa de los datos */}
                         <div className="flex flex-row justify-start items-center gap-2">
@@ -273,7 +282,7 @@ export const CoordsCell = (planet: string) => {
 
                         {/* Botones de interacción con los datos */}
                         {!nthPlanet['restores_at'] && !nthPlanet['under_attack_since'] &&
-                            <div className="group-[.coords-cell]:group-hover:h-10 flex flex-row justify-start items-center gap-2 opacity-0 group-[.coords-cell]:group-hover:opacity-100 h-0 ui-cell-cords">
+                            <div className="group-[.coords-cell]:group-hover:h-10 flex flex-row justify-start items-center gap-2 opacity-0 group-[.coords-cell]:group-hover:opacity-100 h-0 transition-[opacity_0.15s_0.3s,_height_0.3s] duration-300 ui-cell-cords">
 
                                 {/* Marcar como ocupado */}
                                 <ButtonIcon
@@ -441,7 +450,7 @@ const RestoresAt: (config: RestoresAtParams) =>  (React.JSX.Element) = ({
     const mer = Number(hour) <= 12 ? "AM" : "PM"
 
     return (
-        <div className="flex flex-row items-center gap-2 font-mono">
+        <div className="flex flex-row items-center gap-2 group-[.coords-cell]:group-hover:drop-shadow-[0_0_4px_cyan] font-mono transition-all duration-300">
             <img src="/clock.png" alt="" />
             {`${Number(hour) > 12 ? Number(hour) - 12 : (Number(hour) === 0 ? 12 : Number(hour))}:${minute}:${second} ${mer}`}
         </div>
