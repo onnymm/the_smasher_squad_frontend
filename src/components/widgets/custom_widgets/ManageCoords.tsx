@@ -401,7 +401,7 @@ export const CoordsCell = (planet: string) => {
 
                 // Se retorna interfaz para añadir coordenadas
                 return (
-                    <div className="flex flex-row justify-start items-center gap-2">
+                    <div className="flex flex-row justify-start items-center gap-2 h-24 coords-cell group">
 
                         {/* Nivel de base estelar */}
                         <StarBase
