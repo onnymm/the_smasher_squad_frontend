@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { DarkModeContext } from './contexts/darkModeContext';
 import useDarkMode from './hooks/useDarkMode';
 import Login from './routes/Login';
@@ -7,6 +7,7 @@ import { AppContext } from './contexts/appContext';
 import Root from './components/common/Root';
 import { ModalContext } from './contexts/modalContext';
 import Modal from './components/modal/Modal';
+import { useNavigate } from 'react-router-dom';
 
 const App: () => (React.JSX.Element) = () => {
 
@@ -16,6 +17,8 @@ const App: () => (React.JSX.Element) = () => {
     // Obtención del token de autenticación por medio del valor del contexto
     const { token } = useContext(TokenContext);
 
+    const navigateTo = useNavigate();
+
     const [ modalContent, setModalContent ] = useState<string | React.JSX.Element | Array<React.JSX.Element | string | boolean> | undefined>(undefined);
 
     const { closeModal, addOnCloseModalCallback, removeOnCloseModalCallback } = useModalContent(setModalContent);
@@ -23,6 +26,12 @@ const App: () => (React.JSX.Element) = () => {
     // Inicialización de barra lateral siempre activa
     const [ isSidebarOpen, setIsSidebarOpen ] = useState<boolean>(false);
     const [ isSidebarLocked, setIsSidebarLocked ] = useState<boolean>(false);
+
+    useEffect(
+        () => {
+            navigateTo("/")
+        }, [token, navigateTo]
+    )
 
     return (
         // Proveedor de contexto de modo oscuro
