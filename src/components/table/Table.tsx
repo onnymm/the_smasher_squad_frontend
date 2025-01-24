@@ -69,7 +69,7 @@ const Table = ({
     const { columnWidths, resizeColumn } = useColumnWidths(viewConfig);
 
     return (
-        <div id="table-component" className="relative z-0 sm:flex flex-col flex-grow hidden max-w-full overflow-hidden scrollbar-hide size-full">
+        <div id="table-component" className="relative z-0 sm:flex flex-col flex-grow max-w-full overflow-hidden scrollbar-hide size-full">
             <div id="table-visible-area" className={`${isDataEmpty ? "w-full" : "w-max max-w-full"} relative border-gray-500/30 bg-slate-800/70 shadow-md p-2 border rounded-xl transition duration-100 overflow-hidden scrollbar-hide size-full`}>
                 
                 {/* Tabla con datos */}

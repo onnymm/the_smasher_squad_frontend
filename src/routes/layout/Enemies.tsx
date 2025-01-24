@@ -1,6 +1,6 @@
 import { FlagIcon } from "@heroicons/react/24/solid"
 import DataView from "../../components/data_visualizers/DataView"
-import {  CoordsCell, PlayerWidget, XPLevel } from "../../components/widgets/custom_widgets/ManageCoords"
+import {  Checked, CoordsCell, PlayerWidget, XPLevel } from "../../components/widgets/custom_widgets/ManageCoords"
 const Enemies: () => (React.JSX.Element) = () => {
 
     const viewConfig: ViewConfig[] = [
@@ -14,6 +14,13 @@ const Enemies: () => (React.JSX.Element) = () => {
             key: 'level',
             displayName: 'Nivel',
             type: XPLevel,
+            tableVisible: true,
+            canSort: false,
+        },
+        {
+            key: 'checked',
+            displayName: 'Revisado',
+            type: Checked,
             tableVisible: true,
             canSort: false,
         },

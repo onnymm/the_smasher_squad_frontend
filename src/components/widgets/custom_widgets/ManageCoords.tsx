@@ -11,6 +11,9 @@ import { UserContext } from "../../../contexts/userContext";
 import ButtonTextIcon from "../../ui/button/ButtonTextIcon";
 import MarkOnOffline from "../../actions/MarkOnOffline";
 import DeleteCoords from "../../actions/DeleteCoords";
+import Check from "../../ui/check/Check";
+import mobiusAxios from "../../../api/axiosInstance";
+import getBackendUrl from "../../../api/backendUrl";
 
 interface TableCoordinatesParams {
     x: number | null;
@@ -166,6 +169,27 @@ export const XPLevel: (config: XPLevelParams) => (React.JSX.Element) = ({
         <div className="flex flex-row justify-start items-center gap-2 w-min h-8">
             <img src="/xp.png" alt={`Nivel de experiencia: ${level}`} className="min-w-8 h-full" />
             <span>{level}</span>
+        </div>
+    )
+}
+
+interface CheckedParams {
+    enemy_id: number;
+    checked: boolean;
+}
+
+export const Checked: (config: CheckedParams) => (React.JSX.Element) = ({
+    checked,
+    enemy_id
+}) => {
+
+    const sendChecked = async (inputChecked: boolean) => {
+        await mobiusAxios.put(getBackendUrl("/alliances/mark_as_checked/"), {enemy_id, checked: inputChecked}, {authenticate: true})
+    }
+
+    return (
+        <div className="flex flex-row justify-center">
+            <Check value={checked} onClick={sendChecked} />
         </div>
     )
 }
