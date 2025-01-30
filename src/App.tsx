@@ -29,7 +29,9 @@ const App: () => (React.JSX.Element) = () => {
 
     useEffect(
         () => {
-            navigateTo("/")
+            if ( !token ) {
+                navigateTo("/")
+            }
         }, [token, navigateTo]
     )
 
