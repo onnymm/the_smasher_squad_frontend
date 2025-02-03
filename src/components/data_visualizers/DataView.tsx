@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import getTableData from "../../api/dataVisualization";
 import Header from "../layout/Header";
 import Select from "../ui/select/Select";
@@ -8,13 +8,13 @@ import Pagination from "../pagination/Pagination";
 import useSortingFields from "../../hooks/useSortingFields";
 import Table from "../table/Table";
 import { COMMON_LEGEND } from "../../settings/appSettings";
-import { ModalContext } from "../../contexts/modalContext";
+// import { ModalContext } from "../../contexts/modalContext";
+import getBackendUrl from "../../api/backendUrl";
 
 interface DataViewParams {
     backendPath: string;
     viewConfig: ViewConfig[];
     filters?: DataViewFilters;
-    // apiCallback?: GenericDataViewAPICallback;
     itemsPerPage?: number;
     noRecordsIcon: IconType;
     noRecordsMessage: string;
@@ -25,7 +25,6 @@ interface DataViewParams {
 const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
     backendPath,
     viewConfig,
-    // apiCallback,
     filters,
     itemsPerPage: _itemsPerPage = 40,
     noRecordsIcon: NoRecordsIcon = ListBulletIcon,
@@ -50,7 +49,7 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
 
     const [ reload, setReload ] = useState<boolean>(false);
 
-    const { addOnCloseModalCallback, removeOnCloseModalCallback} = useContext(ModalContext);
+    // const { addOnCloseModalCallback, removeOnCloseModalCallback} = useContext(ModalContext);
 
     // // Estado de carga inicial
     // const [ initialLoad, setInitialLoad ] = useState<boolean>(false);
@@ -157,17 +156,19 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
         }, [activeFilter]
     )
 
-    useEffect(
-        () => {
-            addOnCloseModalCallback('dataView', () => (setReload( prevState => !prevState )))
+    // useEffect(
+    //     () => {
+    //         // addOnCloseModalCallback('dataView', () => (setReload( prevState => !prevState )))
 
-            return (
-                () => {
-                    removeOnCloseModalCallback('dataView');
-                }
-            );
-        }, [addOnCloseModalCallback, removeOnCloseModalCallback]
-    )
+    //         // return (
+    //         //     () => {
+    //         //         removeOnCloseModalCallback('dataView');
+    //         //     }
+    //         // );
+    //     }, [addOnCloseModalCallback, removeOnCloseModalCallback]
+    // )
+
+    useUpdateListener(setReload, getBackendUrl('/ws/update_coords'))
 
     if (data) {
         return (
@@ -192,3 +193,38 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
 }
 
 export default DataView;
+
+const useUpdateListener = (
+    setLoad: React.Dispatch<React.SetStateAction<boolean>>,
+    websocketURL: string,
+): void => {
+
+    useEffect(
+        () => {
+
+            const websocket = new WebSocket(websocketURL);
+
+            // websocket.onopen = () => {
+            //     console.log('Websocket abierto');
+            // }
+
+            websocket.onmessage = () => {
+                setLoad( (prev) => !prev )
+            }
+
+            websocket.onerror = () => {
+                console.log('Error en el websocket');
+            }
+
+            // websocket.onclose = () => {
+            //     console.log('Conexión cerrada con el Websocket');
+            // }
+
+            return (
+                () => {
+                    websocket.close()
+                }
+            )
+        }, [websocketURL, setLoad]
+    )
+}
