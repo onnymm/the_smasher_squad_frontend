@@ -41,7 +41,7 @@ const PasswordChecker: (config: PasswordCheckerParams) => (React.JSX.Element | n
                 {!containsNumber &&
                     <div>{" - Debe contener al menos un número."}</div>
                 }
-                <div className="font-bold">{" - NO SE ACEPTAN ALCOHÓLICOS NI AMERICANISTAS."}</div>
+                {/* <div className="font-bold">{" - NO SE ACEPTAN ALCOHÓLICOS NI AMERICANISTAS."}</div> */}
             </Alert>
         )
     } else {
