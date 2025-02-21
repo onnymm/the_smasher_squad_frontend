@@ -109,3 +109,14 @@ interface DataViewFilters {
 interface ColumnWidths {
     [ key: string ]: number | null
 };
+
+// Registro recibido desde el backend
+type DataRecord = {
+    [ key: string ]: DataValue;
+};
+
+// Información de tipo de dato
+interface DataField {
+    name: string;
+    ttype: WidgetComponent;
+};
