@@ -21,9 +21,9 @@ const Group: (config: GroupParams) => (React.JSX.Element) = ({
 }) => {
 
     return (
-        <div className="group-[.line-division]:last:pb-0 group-[.line-division]:pb-[calc(1.5rem_-_2px)] group-[.line-division]:pt-2 flex flex-col gap-2 group-[.line-division]:border-gray-400/50 group-[.line-division]:dark:border-white/30 pb-[calc(1rem_-_2px)] last:pb-0 group-[.line-division]:last:dark:border-transparent group-[.line-division]:last:border-transparent border-b-2 border-b-transparent group ui-layout-group">
+        <div className="group ui-layout-group group-[.line-division]:last:pb-0 group-[.line-division]:pb-[calc(1.5rem_-_2px)] group-[.line-division]:pt-2 flex flex-col group-[.ui-grapper-center]:items-center gap-2 pb-[calc(1rem_-_2px)] last:pb-0 group-[.line-division]:dark:border-white/30 group-[.line-division]:border-gray-400/50 group-[.line-division]:last:dark:border-transparent group-[.line-division]:last:border-transparent border-b-2 border-b-transparent">
             {title &&
-                <p className="font-semibold self-center">{title}</p>
+                <p className="self-center font-semibold">{title}</p>
             }
             {children}
         </div>
