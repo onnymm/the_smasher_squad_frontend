@@ -1,5 +1,5 @@
 import { FlagIcon } from "@heroicons/react/24/solid"
-import DataView from "../../components/data_visualizers/DataView"
+import DataView from "../../components/data_visualizers/PivotDataView"
 import {  Checked, CoordsCell, PlayerWidget, XPLevel } from "../../components/widgets/custom_widgets/ManageCoords"
 const Enemies: () => (React.JSX.Element) = () => {
 
@@ -110,10 +110,18 @@ const Enemies: () => (React.JSX.Element) = () => {
         },
     ]
 
+    const filters: DataViewFilters = {
+        default: {
+            criteria: []
+        },
+        available: []
+    }
+
     return (
         <DataView
             backendPath="/alliances/enemies"
             viewConfig={viewConfig}
+            filters={filters}
             noRecordsIcon={FlagIcon}
             noRecordsMessage="No estamos en guerra"
             showPagination={false}

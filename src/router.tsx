@@ -4,6 +4,8 @@ import Home from "./routes/layout/Home";
 import Coords from "./routes/layout/Coords";
 import Enemies from "./routes/layout/Enemies";
 import ProfileSettings from "./routes/layout/ProfileSettings";
+import EnemyRoute from "./routes/layout/Enemy";
+import AvailableCoords from "./routes/layout/AvailableCoords";
 
 const router = createBrowserRouter(
     [
@@ -24,8 +26,16 @@ const router = createBrowserRouter(
                     element: <Enemies />,
                 },
                 {
+                    path: '/available',
+                    element: <AvailableCoords />
+                },
+                {
                     path: '/me',
-                    element: <ProfileSettings />
+                    element: <ProfileSettings />,
+                },
+                {
+                    path: 'uitests',
+                    element: <EnemyRoute />,
                 }
             ]
         }

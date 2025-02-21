@@ -29,16 +29,55 @@ interface ViewConfig extends SelectableOption<string> {
     options?: ValidationOptions;
 }
 
-// Registro recibido desde el backend
-type DataRecord = {
-    [ key: string ]: DataValue;
-};
+// Tipo de emparejamiento de búsqueda
+type SearchType = 're' | 'contains' | 'match'
 
-// Información de tipo de dato
-interface DataField {
-    name: string;
-    ttype: WidgetComponent;
-};
+// Dominio de búsqueda
+type SearchScope = Record<string, SearchType>
+
+// Estructura de dominio de búsqueda
+interface SearchStructure {
+    text: string;
+    method:  {
+        field: string;
+        type: SearchType;
+    }[]
+}
+
+
+// Operador lógico
+type LogicOperator = '&' | '|'
+
+// Operador de comparación
+type ComparisonOperator = '=' | '!=' | '>' | '>=' | '<' | '<=' | '><' | 'in' | 'not in' | 'ilike' | 'not ilike' | '~' | '~*'
+
+// Formato de valures de tripleta
+type TripletValue = number | string | boolean | number[]
+
+// Tripleta
+type Triplete = [string, ComparisonOperator, TripleteValue]
+
+// Estructura de criterio de búsqueda
+type CriteriaStructure = (LogicOperator | Triplete)[]
+
+// Interfaz de función de solicitud de datos al backend
+type GenericDataViewAPICallback = (
+    params: object,
+    setState: React.Dispatch<React.SetStateAction<DataViewData | undefined>>,
+) => (void)
+
+// Filtro seleccionable para vista de datos
+interface DataFilter extends SelectableOption<number> {
+    criteria: CriteriaStructure;
+}
+
+// Interfaz de filtros
+interface DataViewFilters {
+    default: {
+        criteria: CriteriaStructure;
+    };
+    available: DataFilter[]
+}
 
 // Estructura de datos recibida desde el backend
 interface ResponseDataStructure {

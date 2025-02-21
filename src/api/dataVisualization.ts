@@ -15,7 +15,7 @@ import getBackendUrl from "./backendUrl";
  *  para realizar la solicitud de datos correctamente. La estructura adecuada
  *  de estos parámetros deberá consultarse en el respectivo endpoint del backend.
  */
-const getTableData = async (
+const getPivotTableData = async (
     route: string,
     stateSetter: React.Dispatch<React.SetStateAction<ResponseDataStructure | undefined>>,
     params: object,
@@ -28,4 +28,17 @@ const getTableData = async (
     stateSetter(response.data)
 }
 
-export default getTableData;
+export const getTableData = async (
+    route: string,
+    stateSetter: React.Dispatch<React.SetStateAction<ResponseDataStructure | undefined>>,
+    params: object,
+): Promise<void> => {
+
+    // Obtención de los datos
+    const response = await iaCeleAxios.post(getBackendUrl(route), { ...params }, {authenticate: true})
+
+    // Asignación de estado
+    stateSetter(response.data)
+}
+
+export default getPivotTableData;
