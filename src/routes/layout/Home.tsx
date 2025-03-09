@@ -71,13 +71,13 @@ const Home: () => (React.JSX.Element) = () => {
 
                 {/* Botón para actualizar alianza en guerra */}
                 <ButtonTextIcon type="primary" icon={ArrowPathIcon} onClick={getAllianceStats} disabled={loading}>
-                    Refrescar
+                    Actualizar
                 </ButtonTextIcon>
             </div>
 
             {data &&
                 <div className="flex flex-col items-center gap-2 pb-4 w-min h-[calc(100%_-_4.5rem)]">
-                    <div className="flex flex-col justify-center items-center border-gray-500/30 bg-slate-800/70 shadow-md px-6 py-2 border rounded-xl w-max">
+                    <div className="flex flex-col justify-center items-center bg-slate-800/70 shadow-md px-6 py-2 border border-gray-500/30 rounded-xl w-max">
 
                         <div className="flex flex-row items-center gap-6 w-max">
                             {/* Nombre y logo de la alianza */}
