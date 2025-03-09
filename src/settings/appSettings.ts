@@ -1,4 +1,4 @@
-import { BeakerIcon, Cog6ToothIcon, HomeIcon } from "@heroicons/react/24/outline"
+import { Cog6ToothIcon, HomeIcon } from "@heroicons/react/24/outline"
 import { PlusIcon } from "@heroicons/react/24/solid"
 
 // Delimitador de ancho de pantalla en pixeles
@@ -48,16 +48,16 @@ export const sidebarMenu: MenuSection[] = [
             }
         ]
     },
-    {
-        name: 'Experimental',
-        groups: [
-            {
-                name: 'UI-Tests',
-                icon: BeakerIcon,
-                routes: '/uitests',
-            }
-        ]
-    }
+    // {
+    //     name: 'Experimental',
+    //     groups: [
+    //         {
+    //             name: 'UI-Tests',
+    //             icon: BeakerIcon,
+    //             routes: '/uitests',
+    //         }
+    //     ]
+    // }
 ]
 
 // Mensajes y leyendas
