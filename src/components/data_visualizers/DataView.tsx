@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getTableData } from "../../api/dataVisualization";
 import Header from "../layout/Header";
 import Select from "../ui/select/Select";
@@ -166,4 +166,4 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
     }
 }
 
-export default DataView;
+export default React.memo(DataView);

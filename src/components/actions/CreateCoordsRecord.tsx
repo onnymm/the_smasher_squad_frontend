@@ -10,28 +10,30 @@ import getBackendUrl from "../../api/backendUrl";
 import mobiusAxios from "../../api/axiosInstance";
 import { ModalContext } from "../../contexts/modalContext";
 
-interface AddCoordsParams {
+interface CreateCoordsRecordParams {
     enemyName: string;
     enemyAvatar: string;
+    level: number;
+    role: RoleCode;
     x?: number | undefined;
     y?: number | undefined;
     sscolor?: Mobius.Types.NonNullableSolarSystemColor;
-    colonyId: number;
     planet: number;
     'starbase_level': 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 }
 
-export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
+export const CreateCoordsRecord: (config: CreateCoordsRecordParams) => (React.JSX.Element) = ({
     enemyName,
     enemyAvatar,
+    level,
+    role,
     x,
     y,
     sscolor,
-    colonyId,
     planet,
     starbase_level,
 }) => {
-    
+
     // Obtención de función para agregar contenido al modal
     const { closeModal } = useContext(ModalContext)
 
@@ -41,7 +43,7 @@ export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
 
         try {
             // Envío de datos al API
-            const response = await mobiusAxios.post(getBackendUrl('/alliances/update_coords'), props, { authenticate: true})
+            const response = await mobiusAxios.post(getBackendUrl('/players/add_coords'), props, { authenticate: true})
             // Si los datos fueron guardados correctamente...
             if ( response.data === true ) {
                 setSaved(true);
@@ -95,7 +97,7 @@ export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
     const triggerSendCoords = () => {
         // Si existen valores en X y Y
         if ( inputX !== undefined && inputY !== undefined ) {
-            sendCoords({x: inputX, y: inputY, sscolor: solarSystemColorKey, 'colony_id': colonyId}, setSaved)
+            sendCoords({name: enemyName, x: inputX, y: inputY, sscolor: solarSystemColorKey, planet: planet, avatar: enemyAvatar, level: level, role: role, 'starbase_level': starbase_level}, setSaved)
         }
     }
 

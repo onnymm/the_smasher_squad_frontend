@@ -34,7 +34,7 @@ const router = createBrowserRouter(
                     element: <ProfileSettings />,
                 },
                 {
-                    path: 'uitests',
+                    path: '/add_coords',
                     element: <EnemyRoute />,
                 }
             ]

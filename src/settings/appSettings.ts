@@ -1,4 +1,5 @@
 import { BeakerIcon, Cog6ToothIcon, HomeIcon } from "@heroicons/react/24/outline"
+import { PlusIcon } from "@heroicons/react/24/solid"
 
 // Delimitador de ancho de pantalla en pixeles
 export const screenWidthThereshold = 768
@@ -25,6 +26,16 @@ export const sidebarMenu: MenuSection[] = [
                     }
                 ]
             },
+        ],
+    },
+    {
+        name: 'Coordenadas',
+        groups: [
+            {
+                name: 'Añadir coordenadas',
+                icon: PlusIcon,
+                routes: '/add_coords',
+            }
         ]
     },
     {

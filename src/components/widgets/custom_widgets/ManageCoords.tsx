@@ -53,7 +53,7 @@ interface XPLevelParams {
 }
 
 interface SolarSystemParams {
-    color: 'white' | 'red' | 'green' | 'blue' | 'blue' | 'purple' | 'yellow' | null;
+    color: 'white' | 'red' | 'green' | 'blue' | 'blue' | 'purple' | 'yellow' | null | undefined;
 }
 
 export const TableCoordinates: (config: TableCoordinatesParams) => (React.JSX.Element) = ({
@@ -84,7 +84,7 @@ export const PlayerWidget: (config: TablePlayerParams) => (React.JSX.Element) = 
     const { setModalContent } = useContext(ModalContext)
 
     return (
-        <div className="flex flex-col justify-center items-start gap-2 h-24 group player-cell">
+        <div className="group flex flex-col justify-center items-start gap-2 h-24 player-cell">
 
             <TablePlayer name={name} avatar={avatar} online={online} />
 
@@ -166,8 +166,8 @@ export const XPLevel: (config: XPLevelParams) => (React.JSX.Element) = ({
 }) => {
 
     return (
-        <div className="flex flex-row justify-start items-center gap-2 w-min h-8">
-            <img src="/xp.png" alt={`Nivel de experiencia: ${level}`} className="min-w-8 h-full" />
+        <div className="flex flex-row justify-start items-center gap-2 w-min h-6">
+            <img src="/xp.png" alt={`Nivel de experiencia: ${level}`} className="min-w-6 h-full" />
             <span>{level}</span>
         </div>
     )
@@ -295,7 +295,7 @@ export const CoordsCell = (planet: string) => {
 
                 // Se retorna interfaz para manejo de datos
                 return (
-                    <div className="flex flex-col justify-center items-center gap-2 px-2 h-24 transition-height duration-300 coords-cell group">
+                    <div className="group flex flex-col justify-center items-center gap-2 px-2 h-24 transition-height duration-300 coords-cell">
 
                         {/* Vista previa de los datos */}
                         <div className="flex flex-row justify-start items-center gap-2">
@@ -425,7 +425,7 @@ export const CoordsCell = (planet: string) => {
 
                 // Se retorna interfaz para añadir coordenadas
                 return (
-                    <div className="flex flex-row justify-start items-center gap-2 h-24 coords-cell group">
+                    <div className="group flex flex-row justify-start items-center gap-2 h-24 coords-cell">
 
                         {/* Nivel de base estelar */}
                         <StarBase

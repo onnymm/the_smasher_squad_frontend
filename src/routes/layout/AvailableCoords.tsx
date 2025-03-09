@@ -2,7 +2,7 @@ import { FlagIcon } from "@heroicons/react/24/solid"
 import DataView from "../../components/data_visualizers/DataView"
 import { PlayerWidget, SolarSystem, StarBase, TableCoordinates, XPLevel } from "../../components/widgets/custom_widgets/ManageCoords"
 import { ModalContext } from "../../contexts/modalContext"
-import { useContext } from "react"
+import React, { useContext } from "react"
 import AttackPlanet from "../../components/actions/AttackPlanet"
 import ButtonTextIcon from "../../components/ui/button/ButtonTextIcon"
 
