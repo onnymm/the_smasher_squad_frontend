@@ -80,8 +80,8 @@ interface DataViewFilters {
 }
 
 // Estructura de datos recibida desde el backend
-interface ResponseDataStructure {
-    data: DataRecord[];
+interface ResponseDataStructure<T extends Record> {
+    data: T[];
     count: number;
     fields: DataField[];
 };
@@ -112,7 +112,7 @@ interface ColumnWidths {
 
 // Registro recibido desde el backend
 type DataRecord = {
-    [ key: string ]: DataValue;
+    [ key: string ]: DataValue | any;
 };
 
 // Información de tipo de dato

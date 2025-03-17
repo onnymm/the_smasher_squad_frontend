@@ -10,7 +10,7 @@ import { TableCellsIcon } from "@heroicons/react/24/solid";
 import useSortingFields from "../../hooks/useSortingFields"; // eslint-disable-line
 
 interface TableParams {
-    data: ResponseDataStructure; // Matriz de datos a renderizar.
+    data: ResponseDataStructure<DataRecord>; // Matriz de datos a renderizar.
     viewConfig: ViewConfig[]; // Configuración de vista de datos.
     sortingFieldKey?: string | undefined; // Indicador de cuál columna está ordenando los datos actualmente.
     ascending?: boolean | undefined; // Indicador de dirección de ordenamiento a mostrar en caso de que la columna esté ordenando datos actualmente, obtenido desde el Custom Hook {@link useSortingFields}.
@@ -69,7 +69,7 @@ const Table = ({
     const { columnWidths, resizeColumn } = useColumnWidths(viewConfig);
 
     return (
-        <div id="table-component" className="relative z-0 sm:flex flex-col flex-grow max-w-full overflow-hidden scrollbar-hide size-full">
+        <div id="table-component" className="z-0 relative sm:flex flex-col flex-grow max-w-full size-full overflow-hidden scrollbar-hide">
             <div id="table-visible-area" className={`${isDataEmpty ? "w-full" : "w-max max-w-full"} relative border-gray-500/30 bg-slate-800/70 shadow-md p-2 border rounded-xl transition duration-100 overflow-hidden scrollbar-hide size-full`}>
                 
                 {/* Tabla con datos */}
@@ -81,7 +81,7 @@ const Table = ({
                     {/* Tabla con datos */}
                     {data && !isDataEmpty &&
                         <div id="table-container" className="relative flex rounded-lg min-w-full h-max">
-                            <table role="grid" className="block z-1 table-fixed mb-2 min-w-full size-full">
+                            <table role="grid" className="block z-1 mb-2 min-w-full size-full table-fixed">
 
                                 <TableColumns
                                     viewConfig={viewConfig}
