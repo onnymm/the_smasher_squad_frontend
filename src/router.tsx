@@ -6,6 +6,7 @@ import Enemies from "./routes/layout/Enemies";
 import ProfileSettings from "./routes/layout/ProfileSettings";
 import EnemyRoute from "./routes/layout/Enemy";
 import AvailableCoords from "./routes/layout/AvailableCoords";
+import RadarRoute from "./routes/layout/Radar";
 
 const router = createBrowserRouter(
     [
@@ -36,6 +37,10 @@ const router = createBrowserRouter(
                 {
                     path: '/add_coords',
                     element: <EnemyRoute />,
+                },
+                {
+                    path: '/radar',
+                    element: <RadarRoute />
                 }
             ]
         }

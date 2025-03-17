@@ -1,5 +1,5 @@
 import { Cog6ToothIcon, HomeIcon } from "@heroicons/react/24/outline"
-import { PlusIcon } from "@heroicons/react/24/solid"
+import { PlusIcon, SignalIcon } from "@heroicons/react/24/solid"
 
 // Delimitador de ancho de pantalla en pixeles
 export const screenWidthThereshold = 768
@@ -26,6 +26,11 @@ export const sidebarMenu: MenuSection[] = [
                     }
                 ]
             },
+            {
+                name: 'Radar de alianzas',
+                icon: SignalIcon,
+                routes: '/radar',
+            }
         ],
     },
     {
@@ -48,16 +53,6 @@ export const sidebarMenu: MenuSection[] = [
             }
         ]
     },
-    // {
-    //     name: 'Experimental',
-    //     groups: [
-    //         {
-    //             name: 'UI-Tests',
-    //             icon: BeakerIcon,
-    //             routes: '/uitests',
-    //         }
-    //     ]
-    // }
 ]
 
 // Mensajes y leyendas

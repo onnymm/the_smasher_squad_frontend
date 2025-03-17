@@ -15,6 +15,7 @@ import { ManageCoords } from "../../components/actions/AddCoords";
 import { ModalContext } from "../../contexts/modalContext";
 import DeleteCoords from "../../components/actions/DeleteCoords";
 import { CreateCoordsRecord } from "../../components/actions/CreateCoordsRecord";
+import { createAllianceLogoURL } from "../../utils/common";
 
 interface _DataFromAPI {
     player: PlayerDataFromAPI;
@@ -282,11 +283,3 @@ const roleDescription = (role: RoleCode): string => {
     return roleName[role]
 }
 
-const createAllianceLogoURL = (
-    shape: number,
-    pattern: number,
-    icon: number,
-): string => {
-
-    return (`https://cdn.galaxylifegame.net/content/img/alliance_flag/AllianceLogos/flag_${shape}_${pattern}_${icon}.png`)
-}
