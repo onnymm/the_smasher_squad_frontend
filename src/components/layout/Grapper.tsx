@@ -2,7 +2,7 @@ import Group from "./Group"; // eslint-disable-line
 
 interface GrapperParams extends GenericInvolverComponent {
     groupDivisions?: boolean;
-    justify: 'start' | 'center';
+    justify?: 'start' | 'center';
 }
 
 /** 
@@ -28,7 +28,7 @@ const Grapper: (config: GrapperParams) => (React.JSX.Element) = ({
     }
 
     return (
-        <div className={`${groupDivisions ? 'group line-division' : ''} ${uiGroup[justify]} items-${justify} group backdrop-blur-sm flex flex-col gap-2 border-gray-500/50 bg-gray-500/10 p-4 border rounded-lg w-full h-full`}>
+        <div className={`${groupDivisions ? 'group line-division' : ''} ${uiGroup[justify]} items-${justify} group backdrop-blur-sm flex flex-col gap-2 border-gray-500/50 bg-gray-500/10 p-4 border rounded-lg w-full h-full max-h-[calc(100%_-_4rem)]`}>
             { children }
         </div>
     )
