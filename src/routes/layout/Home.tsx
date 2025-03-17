@@ -18,7 +18,7 @@ interface DataFromAPI {
         pattern: string;
         icon: string;
     }
-    'enemy_alliance_members': ResponseDataStructure,
+    'enemy_alliance_members': ResponseDataStructure<DataRecord>,
 }
 
 const Home: () => (React.JSX.Element) = () => {

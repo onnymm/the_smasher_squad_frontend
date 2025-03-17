@@ -17,7 +17,7 @@ import getBackendUrl from "./backendUrl";
  */
 const getPivotTableData = async (
     route: string,
-    stateSetter: React.Dispatch<React.SetStateAction<ResponseDataStructure | undefined>>,
+    stateSetter: React.Dispatch<React.SetStateAction<ResponseDataStructure<DataRecord> | undefined>>,
     params: object,
 ): Promise<void> => {
 
@@ -30,7 +30,7 @@ const getPivotTableData = async (
 
 export const getTableData = async (
     route: string,
-    stateSetter: React.Dispatch<React.SetStateAction<ResponseDataStructure | undefined>>,
+    stateSetter: React.Dispatch<React.SetStateAction<ResponseDataStructure<DataRecord> | undefined>>,
     params: object,
 ): Promise<void> => {
 

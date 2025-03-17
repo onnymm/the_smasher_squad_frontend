@@ -3,7 +3,7 @@ import Table from "../Table"; // eslint-disable-line
 import TableRow from "./TableRow";
 
 interface TableBodyParams {
-    data: ResponseDataStructure; // Matriz de datos a renderizar.
+    data: ResponseDataStructure<DataRecord>; // Matriz de datos a renderizar.
     viewConfig: ViewConfig[]; // Configuración de vista de datos.
     visibleColumns?: OptionObject[]; // Estado {@link OptionObject OptionObject[ ]} de columnas visibles.
     columnWidths: WidthsValues; // Estado de ancho de columnas, obtenido desde el Custom Hook {@link useColumnWidths}.
@@ -32,7 +32,7 @@ const TableBody = ({
 }: TableBodyParams): (React.JSX.Element) => {
 
     return (
-        <tbody className="p-t-10 rounded-lg overflow-hidden size-full">
+        <tbody className="p-t-10 rounded-lg size-full overflow-hidden">
             {
                 data.data.map(
                     (record, i) => (

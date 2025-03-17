@@ -50,7 +50,7 @@ const DataView: (config: DataViewParams) => React.JSX.Element | undefined = ({
     const [ loading, setLoading ] = useState<boolean>(true);
 
     // Inicialización de estado de los datos
-    const [ data, setData ] = useState<ResponseDataStructure | undefined>(undefined);
+    const [ data, setData ] = useState<ResponseDataStructure<DataRecord> | undefined>(undefined);
     // Inicialización de la página a visualizar
     const [ page, setPage ] = useState<number | ((page: number) => (number)) | undefined>(0);
     // Inicialización de cantidad de registros por página
