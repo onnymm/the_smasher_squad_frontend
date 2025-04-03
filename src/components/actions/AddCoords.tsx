@@ -143,7 +143,7 @@ export const ManageCoords: (config: AddCoordsParams) => (React.JSX.Element) = ({
                 icon={CheckIcon}
                 onClick={triggerSendCoords}
                 type="primary"
-                disabled={ inputX === undefined || inputY === undefined || saved === undefined }
+                disabled={ inputX === undefined || inputY === undefined || saved === undefined || !solarSystemColorKey }
             >
                 Guardar
             </ButtonTextIcon>
