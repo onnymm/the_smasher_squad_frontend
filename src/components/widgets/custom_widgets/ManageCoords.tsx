@@ -88,7 +88,7 @@ export const PlayerWidget: (config: TablePlayerParams) => (React.JSX.Element) = 
 
             <TablePlayer name={name} avatar={avatar} online={online} />
 
-            <div className="group-[.player-cell]:group-hover:h-10 flex flex-row justify-start items-center gap-2 opacity-0 group-[.player-cell]:group-hover:opacity-100 group-[.coords-cell]:group-hover:opacity-100 h-0 transition-[opacity_0.15s_0.3s,_height_0.3s] duration-300">
+            <div className="flex flex-row justify-start items-center gap-2 opacity-0 group-[.coords-cell]:group-hover:opacity-100 group-[.player-cell]:group-hover:opacity-100 h-0 group-[.player-cell]:group-hover:h-10 transition-[opacity_0.15s_0.3s,_height_0.3s] duration-300">
                 <ButtonTextIcon
                     icon={DevicePhoneMobileIcon}
                     type={online ? "primary" : "secondary"}
@@ -295,10 +295,10 @@ export const CoordsCell = (planet: string) => {
 
                 // Se retorna interfaz para manejo de datos
                 return (
-                    <div className="group flex flex-col justify-center items-center gap-2 px-2 h-24 transition-height duration-300 coords-cell">
+                    <div className={'group flex flex-col justify-center items-center gap-2 px-2 h-24 transition-height duration-300 coords-cell'}>
 
                         {/* Vista previa de los datos */}
-                        <div className="flex flex-row justify-start items-center gap-2">
+                        <div className={`${online ? 'opacity-25' : ''} flex flex-row justify-start items-center gap-2`}>
                             <SolarSystem {...nthPlanet} />
                             <StarBase {...nthPlanet} />
                             <TableCoordinates {...nthPlanet} />
@@ -306,7 +306,7 @@ export const CoordsCell = (planet: string) => {
 
                         {/* Botones de interacción con los datos */}
                         {!nthPlanet['restores_at'] && !nthPlanet['under_attack_since'] &&
-                            <div className="group-[.coords-cell]:group-hover:h-10 flex flex-row justify-start items-center gap-2 opacity-0 group-[.coords-cell]:group-hover:opacity-100 h-0 transition-[opacity_0.15s_0.3s,_height_0.3s] duration-300 ui-cell-cords">
+                            <div className="flex flex-row justify-start items-center gap-2 opacity-0 group-[.coords-cell]:group-hover:opacity-100 h-0 group-[.coords-cell]:group-hover:h-10 transition-[opacity_0.15s_0.3s,_height_0.3s] duration-300 ui-cell-cords">
 
                                 {/* Marcar como ocupado */}
                                 <ButtonIcon
